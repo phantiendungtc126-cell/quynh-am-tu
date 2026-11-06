@@ -220,10 +220,16 @@
       const a = -Math.PI / 2 + i * Math.PI * 2 / SO - lech;
       const x = cx + Math.cos(a) * R, y = cx + Math.sin(a) * R;
       const dinh = Math.abs(((a + Math.PI / 2) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2)) < 0.01;
-      const gr = gC.createRadialGradient(x - 3, y - 3, 1, x, y, w * 0.032);
-      gr.addColorStop(0, dinh ? '#ffe3a3' : '#c58a4a'); gr.addColorStop(1, dinh ? '#b5822f' : '#5a3418');
+      const r = w * (dinh ? 0.038 : 0.03);
+      // bóng hạt đổ xuống dưới phải
+      gC.fillStyle = 'rgba(0,0,0,0.45)';
+      gC.beginPath(); gC.ellipse(x + r * 0.35, y + r * 0.55, r * 0.95, r * 0.7, 0, 0, Math.PI * 2); gC.fill();
+      const gr = gC.createRadialGradient(x - r * 0.4, y - r * 0.45, r * 0.08, x, y, r);
+      gr.addColorStop(0, dinh ? '#fff1c9' : '#f0b878'); gr.addColorStop(0.35, dinh ? '#e6b250' : '#a8662e'); gr.addColorStop(1, dinh ? '#6e4a12' : '#3a1e0a');
       gC.fillStyle = gr;
-      gC.beginPath(); gC.arc(x, y, w * (dinh ? 0.036 : 0.028), 0, Math.PI * 2); gC.fill();
+      gC.beginPath(); gC.arc(x, y, r, 0, Math.PI * 2); gC.fill();
+      gC.fillStyle = 'rgba(255,255,255,0.55)';
+      gC.beginPath(); gC.ellipse(x - r * 0.38, y - r * 0.42, r * 0.22, r * 0.14, -0.6, 0, Math.PI * 2); gC.fill();
     }
     // hạt mẫu (đầu chuỗi)
     gC.fillStyle = '#9b2f26';
@@ -246,7 +252,12 @@
     if (navigator.vibrate) navigator.vibrate(8);
   });
   $('cauNiem').value = LS.lay('qat.cau', 'Nam Mô A Di Đà Phật');
-  $('cauNiem').addEventListener('change', e => LS.dat('qat.cau', e.target.value));
+  $('cauNiem').addEventListener('change', e => {
+    LS.dat('qat.cau', e.target.value);
+    Am.Tung.cauNiem = e.target.value;
+    if (Am.Tung.chay && Am.Tung.bai === 'niem') Am.Tung.batDau({ bai: 'niem' });
+  });
+  Am.Tung.cauNiem = $('cauNiem').value;
 
   // ---------- Chánh điện ----------
   function nghi(el, ms) { el.disabled = true; setTimeout(() => el.disabled = false, ms); }
@@ -257,6 +268,11 @@
   nutNhanh($('nutMo'), () => { themCho('mo', 1); Am.mo(); Canh.mo(); });
   $('nutChuong').addEventListener('click', e => { themCho('chuong', 1); Am.chuong(); Canh.chuong(); nghi(e.currentTarget, 3000); });
   $('gioTuChung').textContent = (window.CHUA && CHUA.GIO_TU_CHUNG) || 'Nhóm chưa hẹn giờ';
+  // chạm thẳng vào chuông, mõ trong cảnh
+  Canh.onCham = vat => {
+    if (vat === 'mo') { themCho('mo', 1); Am.mo(); Canh.mo(); }
+    if (vat === 'chuong' && !$('nutChuong').disabled) { themCho('chuong', 1); Am.chuong(); Canh.chuong(); nghi($('nutChuong'), 3000); }
+  };
 
   // ---------- Xin xăm ----------
   $('nutXam').addEventListener('click', () => {
@@ -297,41 +313,89 @@
     ghi.textContent = 'Chạm vào một chữ để bắt đầu tụng từ chữ đó.';
     kinhEl.append(ghi);
   })();
-  let viTri = 0, nhip = null, khoaMan = null;
+  // Giọng tụng do Am.Tung phát; chữ đang đọc sáng lên theo từng tiếng mõ.
+  const T = Am.Tung;
+  let viTri = 0, dangChu = -1, tungGhi = false, khoaMan = null;
   const nhipEl = $('nhipMo');
-  nhipEl.addEventListener('input', () => { $('nhipSo').textContent = nhipEl.value; if (nhip) { dungTung(); batTung(); } });
+  nhipEl.value = T.nhip; $('nhipSo').textContent = T.nhip;
+  nhipEl.addEventListener('input', () => { $('nhipSo').textContent = nhipEl.value; T.datNhip(+nhipEl.value); });
   kinhEl.addEventListener('click', e => {
     const sp = e.target.closest('span.chu'); if (!sp) return;
-    viTri = +sp.dataset.i; danhDau();
+    viTri = +sp.dataset.i; dangChu = -1; danhDau(viTri);
+    if (tungGhi) batTung();
   });
-  function danhDau() {
-    chu.forEach((s, i) => { s.classList.toggle('da', i < viTri); s.classList.toggle('dang', i === viTri && !!nhip); });
+  function danhDau(den) {
+    chu.forEach((s, i) => { s.classList.toggle('da', i < den); s.classList.toggle('dang', i === dangChu); });
   }
-  function batTung() {
+  async function batTung() {
     if (viTri >= chu.length) viTri = 0;
-    $('nutTung').textContent = 'Dừng';
+    tungGhi = true; $('nutTung').textContent = 'Dừng';
     try { navigator.wakeLock && navigator.wakeLock.request('screen').then(k => khoaMan = k).catch(() => {}); } catch (e) {}
-    const buoc = () => {
-      if (viTri >= chu.length) {
-        dungTung(); viTri = 0; danhDau();
-        themCho('kinh', 1, 'một biến Bát Nhã Tâm Kinh'); Am.chuong();
-        baoTin('Đã tụng xong một biến Tâm Kinh. Công đức đã ghi vào sổ.');
-        return;
-      }
-      Am.mo(); danhDau();
-      const sp = chu[viTri], r = sp.getBoundingClientRect();
-      if (r.top < 90 || r.bottom > innerHeight - 110) sp.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-      viTri++;
-    };
-    buoc();
-    nhip = setInterval(buoc, 60000 / +nhipEl.value);
+    try { await T.batDau({ bai: 'kinh', tuChu: viTri, ghiCong: true }); capNhatMay(); }
+    catch (e) { tungGhi = false; $('nutTung').textContent = 'Tụng'; baoTin('Chưa tải được tiếng tụng kinh: ' + e.message); }
   }
   function dungTung() {
-    clearInterval(nhip); nhip = null; $('nutTung').textContent = 'Tụng';
+    tungGhi = false; T.dung(); $('nutTung').textContent = 'Tụng';
     if (khoaMan) { khoaMan.release().catch(() => {}); khoaMan = null; }
-    danhDau();
+    dangChu = -1; danhDau(viTri);
   }
-  $('nutTung').addEventListener('click', () => { nhip ? dungTung() : batTung(); });
+  $('nutTung').addEventListener('click', () => { tungGhi && T.chay ? dungTung() : batTung(); });
+  T.nghe(b => {
+    if (b.kinhI !== undefined) {
+      dangChu = b.kinhI; viTri = b.kinhI + 1; danhDau(b.kinhI);
+      $('mayDong').textContent = 'Bát Nhã Tâm Kinh · chữ ' + (b.kinhI + 1) + '/' + chu.length;
+      const gian = $('t-kinh');
+      if (!gian.hidden) {
+        const sp = chu[b.kinhI], r = sp.getBoundingClientRect();
+        if (r.top < 90 || r.bottom > innerHeight - 170) sp.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }
+    }
+    if (b.niem) $('mayDong').textContent = 'Đang niệm: ' + (T.bai === 'niem' ? T.cauNiem : 'Nam Mô A Di Đà Phật');
+    if (b.xongKinh) {
+      viTri = 0; dangChu = -1; danhDau(0);
+      if (tungGhi) {
+        themCho('kinh', 1, 'một biến Bát Nhã Tâm Kinh');
+        baoTin('Đã tụng xong một biến Tâm Kinh. Công đức đã ghi vào sổ.');
+        tungGhi = false; $('nutTung').textContent = 'Tụng';
+        if (khoaMan) { khoaMan.release().catch(() => {}); khoaMan = null; }
+      }
+    }
+    if (b.dung || b.batDau) capNhatMay();
+  });
+
+  // ---------- Thanh phát kinh nhỏ ----------
+  const chonBai = $('chonBai'), amLuongEl = $('amLuong');
+  chonBai.value = T.bai === 'kinh' || T.bai === 'niem' ? T.bai : 'thoikinh';
+  amLuongEl.value = T.amLuong;
+  let tuPhat = LS.lay('qat.tuphat', true);
+  function capNhatMay() {
+    $('mayKinh').classList.toggle('dang-phat', T.chay);
+    $('nutPhat').setAttribute('aria-label', T.chay ? 'Tạm dừng tiếng tụng' : 'Phát tiếng tụng kinh');
+    if (!T.chay) $('mayDong').textContent = 'Bấm ▶ để nghe tụng kinh';
+  }
+  async function phatNen() {
+    tungGhi = false; $('nutTung').textContent = 'Tụng';
+    T.cauNiem = $('cauNiem').value;
+    $('mayDong').textContent = 'Đang tải tiếng tụng…';
+    try { await T.batDau({ bai: chonBai.value }); }
+    catch (e) { baoTin('Chưa tải được tiếng tụng kinh: ' + e.message); }
+    capNhatMay();
+  }
+  $('nutPhat').addEventListener('click', () => { T.chay ? (T.dung(), dungTung()) : phatNen(); });
+  chonBai.addEventListener('change', () => { if (T.chay) phatNen(); });
+  amLuongEl.addEventListener('input', () => T.datAmLuong(+amLuongEl.value));
+  // Trình duyệt chỉ cho phát tiếng sau lần chạm đầu tiên
+  function chamDau(e) {
+    document.removeEventListener('pointerdown', chamDau, true);
+    document.removeEventListener('keydown', chamDau, true);
+    const trongMay = e && e.target && e.target.closest && e.target.closest('#mayKinh');
+    if (tuPhat && !T.chay && !trongMay) phatNen();
+  }
+  if (tuPhat) {
+    document.addEventListener('pointerdown', chamDau, true);
+    document.addEventListener('keydown', chamDau, true);
+    $('mayDong').textContent = 'Chạm màn hình để nghe tụng kinh';
+  } else capNhatMay();
 
   // ---------- Hoa đăng ----------
   const loi = $('loiNguyen');
@@ -351,7 +415,6 @@
 
   // ---------- Các gian ----------
   function di(tab) {
-    if (nhip && tab !== 'kinh') dungTung();
     document.querySelectorAll('.trang').forEach(s => s.hidden = s.dataset.tab !== tab);
     document.querySelectorAll('.duoi button').forEach(b => b.dataset.di === tab ? b.setAttribute('aria-current', 'page') : b.removeAttribute('aria-current'));
     if (tab === 'chanhdien') Canh.batDau(); else Canh.dung();
@@ -376,11 +439,13 @@
     $('maChua').value = ma;
     $('khoiMa').hidden = Api.thu;
     $('batTieng').checked = Am.bat;
+    $('tuPhat').checked = tuPhat;
     $('loiVao').textContent = Api.thu ? 'Chưa nối Google Sheet: đang chạy thử, dữ liệu chỉ lưu trên máy này.' : '';
     if (!hop.open) hop.showModal();
   }
   $('nutCaiDat').addEventListener('click', moHopVao);
   $('batTieng').addEventListener('change', e => { if (e.target.checked !== Am.bat) Am.doi(); });
+  $('tuPhat').addEventListener('change', e => { tuPhat = e.target.checked; LS.dat('qat.tuphat', tuPhat); });
   $('formVao').addEventListener('submit', async e => {
     e.preventDefault();
     const t = $('tenBan').value.trim().replace(/\s+/g, ' ');
