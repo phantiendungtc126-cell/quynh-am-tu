@@ -1,0 +1,255 @@
+/* Bố cục: một cột kiểu điện thoại (Zalo mở trên máy), đêm xanh mực, ánh nến vàng, hoa quỳnh trắng. */
+:root {
+  --muc: #0f1424;        /* nền đêm */
+  --muc-2: #161e33;      /* mặt thẻ */
+  --muc-3: #26304c;      /* đường kẻ */
+  --trang: #eef0f6;      /* chữ chính */
+  --mo: #9aa3bd;         /* chữ phụ */
+  --vang: #e2b25c;       /* ánh nến */
+  --vang-dam: #a87a32;
+  --quynh: #f6f2ea;      /* hoa quỳnh */
+  --son: #9b2f26;        /* son đỏ con dấu */
+  --chu-hien: 'Cormorant Garamond', 'Noto Serif', Georgia, serif;
+  --chu-than: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --chu-han: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
+  --cot: 600px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; font-variant-numeric: lining-nums; }
+.so, .so-niem, .gio { font-variant-numeric: lining-nums tabular-nums !important; }
+[hidden] { display: none !important; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  background: var(--muc);
+  background-image: radial-gradient(120% 60% at 50% 0%, #1d2747 0%, var(--muc) 60%);
+  background-attachment: fixed;
+  color: var(--trang);
+  font: 15px/1.6 var(--chu-than);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  -webkit-tap-highlight-color: transparent;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--vang); outline-offset: 2px; }
+
+/* ---------- Đầu trang ---------- */
+.dau {
+  max-width: var(--cot); margin: 0 auto;
+  display: flex; align-items: center; gap: 14px;
+  padding-block: calc(14px + env(safe-area-inset-top, 0px)) 10px;
+}
+.an-trien {
+  font-family: var(--chu-han); font-weight: 700;
+  background: var(--son); color: var(--quynh);
+  font-size: 15px; line-height: 1.12; text-align: center;
+  padding: 6px 7px; border-radius: 3px;
+  box-shadow: inset 0 0 0 2px var(--son), inset 0 0 0 3px #ffffff40;
+}
+.an-trien.lon { font-size: 22px; padding: 9px 11px; margin: 0 auto 12px; width: max-content; }
+.dau-chu { flex: 1; min-width: 0; }
+h1 {
+  font-family: var(--chu-hien); font-weight: 700;
+  font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: .01em;
+  color: var(--quynh);
+}
+.chao { margin: 2px 0 0; color: var(--mo); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nut-nho {
+  background: transparent; border: 1px solid var(--muc-3); border-radius: 999px;
+  padding: 5px 12px; font-size: 13px; color: var(--mo);
+}
+
+main { max-width: var(--cot); margin: 0 auto; }
+.trang { display: grid; gap: 16px; padding-block: 6px 20px; }
+
+.nhan { margin: 0; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--mo); }
+.the {
+  background: var(--muc-2); border: 1px solid var(--muc-3);
+  border-radius: 10px; padding: 14px 16px;
+}
+h2 { font-family: var(--chu-hien); font-weight: 700; font-size: 24px; margin: 0; text-wrap: balance; color: var(--quynh); }
+.tieu { margin-top: 10px; }
+
+.nut-chinh {
+  background: var(--vang); color: #241806; border: 0; border-radius: 8px;
+  padding: 10px 18px; font-weight: 600;
+}
+.nut-chinh:active { transform: translateY(1px); }
+.nut-chinh[disabled] { opacity: .5; }
+
+/* ---------- Chánh điện ---------- */
+.khung-canh { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--muc-3); background: #0a0e1a; }
+#canh { display: block; width: 100%; aspect-ratio: 4 / 5; max-width: 100%; touch-action: manipulation; }
+.dang-chay {
+  position: absolute; left: 0; right: 0; bottom: 0; margin: 0;
+  padding: 18px 14px 10px; font-size: 13px; color: var(--quynh);
+  background: linear-gradient(transparent, #0a0e1acc);
+  text-align: center;
+}
+.hanh-le { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.le {
+  display: grid; gap: 2px; justify-items: center; text-align: center;
+  background: var(--muc-2); border: 1px solid var(--muc-3); border-radius: 10px;
+  padding: 12px 4px; min-width: 0;
+}
+.le:active { background: var(--muc-3); }
+.le-ten { font-weight: 600; font-size: 14px; line-height: 1.25; }
+.le-phu { font-size: 12px; color: var(--mo); font-variant-numeric: tabular-nums; }
+.gio { margin: 4px 0 0; font-family: var(--chu-hien); font-size: 21px; font-weight: 600; color: var(--vang); }
+
+/* ---------- Niệm Phật ---------- */
+.chon-cau { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--mo); margin-bottom: -10px; }
+select {
+  background: var(--muc-2); border: 1px solid var(--muc-3); border-radius: 8px;
+  padding: 10px 12px; width: 100%;
+}
+.chuoi {
+  position: relative; justify-self: center;
+  width: min(330px, 100%); aspect-ratio: 1; max-width: 100%;
+  border: 0; border-radius: 50%; background: transparent; padding: 0;
+  touch-action: manipulation; user-select: none;
+}
+.chuoi canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.chuoi-giua { position: relative; display: grid; place-items: center; align-content: center; height: 100%; }
+.so-niem { font-family: var(--chu-hien); font-weight: 700; font-size: 64px; line-height: 1; color: var(--quynh); font-variant-numeric: tabular-nums; }
+.hat-thu { font-size: 13px; color: var(--mo); font-variant-numeric: tabular-nums; }
+.chuoi.nhay .so-niem { animation: nhay .18s ease-out; }
+@keyframes nhay { from { transform: scale(1.08); } to { transform: none; } }
+.goi-y { margin: 0; text-align: center; color: var(--mo); font-size: 13px; }
+.hai-so { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.hai-so > div { background: var(--muc-2); border: 1px solid var(--muc-3); border-radius: 10px; padding: 12px 14px; }
+.so { margin: 2px 0 0; font-family: var(--chu-hien); font-weight: 700; font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+
+/* ---------- Tụng kinh ---------- */
+.kinh-dau { display: grid; gap: 4px; }
+.dieu-khien { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.nhip { font-size: 13px; color: var(--mo); font-variant-numeric: tabular-nums; }
+input[type=range] { flex: 1; min-width: 120px; accent-color: var(--vang); }
+.kinh {
+  font-family: var(--chu-hien); font-size: 21px; line-height: 1.75;
+  background: var(--muc-2); border: 1px solid var(--muc-3); border-radius: 10px;
+  padding: 16px 18px; max-width: 100%; min-width: 0;
+}
+.kinh p { margin: 0 0 .7em; }
+.kinh .ten-kinh { font-weight: 700; color: var(--vang); text-align: center; }
+.kinh .ghi { font-family: var(--chu-than); font-size: 13px; color: var(--mo); text-align: center; }
+.kinh span.chu { border-radius: 3px; transition: color .2s; }
+.kinh span.da { color: var(--mo); }
+.kinh span.dang { color: #241806; background: var(--vang); box-shadow: 0 0 0 2px var(--vang); }
+
+/* ---------- Hoa đăng ---------- */
+textarea {
+  width: 100%; margin-top: 8px; resize: vertical;
+  background: var(--muc); border: 1px solid var(--muc-3); border-radius: 8px; padding: 10px 12px;
+}
+.hang { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+.an-ten { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--mo); }
+.dem-chu { margin-left: auto; font-size: 12px; color: var(--mo); font-variant-numeric: tabular-nums; }
+.mat-nuoc { position: relative; height: 0; }
+.ds-hoadang { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ds-hoadang li {
+  display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start;
+  padding: 12px 14px; border-radius: 10px;
+  background: linear-gradient(180deg, #1a2440, var(--muc-2));
+  border: 1px solid var(--muc-3);
+}
+.ds-hoadang .den { width: 34px; height: 34px; }
+.ds-hoadang .loi { margin: 0; font-family: var(--chu-hien); font-size: 19px; line-height: 1.4; font-style: italic; color: var(--quynh); overflow-wrap: anywhere; }
+.ds-hoadang .ai { margin: 4px 0 0; font-size: 12px; color: var(--mo); }
+.trong { color: var(--mo); text-align: center; padding: 18px 8px; margin: 0; }
+.den-troi {
+  position: fixed; left: 50%; bottom: 90px; width: 56px; height: 56px; margin-left: -28px;
+  pointer-events: none; z-index: 5; animation: troi 4.5s ease-in forwards;
+}
+@keyframes troi {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(40px, -70vh) scale(.5); opacity: 0; }
+}
+
+/* ---------- Công đức ---------- */
+.chuyen { display: flex; gap: 4px; background: var(--muc-2); border: 1px solid var(--muc-3); border-radius: 999px; padding: 4px; width: max-content; max-width: 100%; }
+.chuyen button { border: 0; background: transparent; padding: 6px 14px; border-radius: 999px; font-size: 14px; color: var(--mo); }
+.chuyen button[aria-selected=true] { background: var(--muc-3); color: var(--trang); }
+.tong-nhom { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tong-nhom div { background: var(--muc-2); border: 1px solid var(--muc-3); border-radius: 10px; padding: 10px 12px; min-width: 0; }
+.tong-nhom .so { font-size: 26px; }
+.bang-cuon { overflow-x: auto; border: 1px solid var(--muc-3); border-radius: 10px; }
+.bang { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.bang th, .bang td { padding: 9px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--muc-3); }
+.bang th:first-child, .bang td:first-child { text-align: left; position: sticky; left: 0; background: var(--muc-2); }
+.bang thead th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--mo); font-weight: 500; background: var(--muc-2); }
+.bang tbody tr:last-child td { border-bottom: 0; }
+.bang td.toi { color: var(--vang); font-weight: 600; }
+.bang td.khong { color: var(--muc-3); }
+.nhat-ky { list-style: none; margin: 0; padding: 0; display: grid; }
+.nhat-ky li { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--muc-3); font-size: 14px; }
+.nhat-ky li:last-child { border-bottom: 0; }
+.nhat-ky .luc { margin-left: auto; color: var(--mo); font-size: 12px; white-space: nowrap; padding-left: 8px; }
+.nhat-ky b { font-weight: 600; color: var(--quynh); }
+.hoi-huong { margin: 20px 0 0; text-align: center; font-family: var(--chu-hien); font-style: italic; font-size: 19px; line-height: 1.5; color: var(--mo); }
+
+/* ---------- Trạng thái ---------- */
+.trang-thai {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  margin: 0; max-width: calc(100% - 32px);
+  background: var(--muc-3); color: var(--trang); border-radius: 999px;
+  padding: 7px 14px; font-size: 13px; z-index: 6; border-radius: 12px; width: max-content; text-align: center;
+  opacity: 0; transition: opacity .25s; pointer-events: none;
+}
+.trang-thai.hien { opacity: 1; }
+
+/* ---------- Thanh dưới ---------- */
+.duoi {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 4;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  background: #0c1120f2; border-top: 1px solid var(--muc-3);
+  backdrop-filter: blur(8px);
+  padding: 4px max(8px, env(safe-area-inset-right, 0px)) calc(4px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+}
+.duoi button {
+  background: none; border: 0; padding: 12px 2px; font-size: 12.5px; color: var(--mo);
+  border-top: 2px solid transparent; min-width: 0;
+}
+.duoi button[aria-current=page] { color: var(--vang); border-top-color: var(--vang); font-weight: 600; }
+
+/* ---------- Hộp thoại ---------- */
+dialog {
+  border: 1px solid var(--muc-3); border-radius: 14px; background: var(--muc-2); color: var(--trang);
+  width: min(420px, calc(100% - 32px)); padding: 22px 20px;
+}
+dialog::backdrop { background: #05070dcc; }
+dialog h2 { text-align: center; }
+dialog p { color: var(--mo); font-size: 14px; }
+dialog label { display: block; font-size: 13px; color: var(--mo); margin: 12px 0 4px; }
+dialog input {
+  width: 100%; background: var(--muc); border: 1px solid var(--muc-3); border-radius: 8px; padding: 10px 12px;
+}
+dialog .nut-chinh { width: 100%; margin-top: 16px; }
+dialog label.tieng { display: flex; margin-top: 14px; }
+dialog label.tieng input { width: auto; }
+.loi { color: #f0a08f !important; min-height: 1em; margin: 8px 0 0; }
+
+/* Quẻ xăm */
+.ong-xam { display: flex; justify-content: center; gap: 3px; height: 92px; align-items: flex-end; margin-bottom: 8px; }
+.ong-xam span { width: 7px; height: 70px; background: linear-gradient(var(--son) 0 14%, #d9b77a 14%); border-radius: 2px; }
+.ong-xam span:nth-child(2) { height: 78px; } .ong-xam span:nth-child(4) { height: 74px; }
+.ong-xam.lac { animation: lac .14s linear 9; }
+@keyframes lac { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-9deg); } 75% { transform: rotate(9deg); } }
+.ong-xam.ra span:nth-child(3) { transform: translateY(-26px); background: linear-gradient(var(--vang) 0 14%, #d9b77a 14%); transition: transform .5s; }
+.que-so { text-align: center; font-family: var(--chu-hien); font-size: 26px; font-weight: 700; color: var(--quynh); margin: 0; }
+.que-bac { text-align: center; margin: 2px 0 12px !important; color: var(--vang) !important; letter-spacing: .08em; text-transform: uppercase; font-size: 12px !important; }
+.que-tho { font-family: var(--chu-hien); font-style: italic; font-size: 20px !important; line-height: 1.5; color: var(--quynh) !important; text-align: center; margin: 0 0 12px; }
+.que-ban { font-size: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; }
+}
+@media (max-width: 380px) {
+  .le-ten { font-size: 13px; }
+  .duoi button { font-size: 11.5px; }
+}
