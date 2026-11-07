@@ -3,120 +3,119 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Quỳnh Am Tự</title>
-<meta name="description" content="Chùa online của nhóm bạn đạo: thắp hương, gõ mõ, niệm Phật, tụng kinh, thả hoa đăng.">
-<meta name="theme-color" content="#0f1424">
+<title>Công Viên Cầu Vồng</title>
+<meta name="description" content="Khu vui chơi online của nhóm: thả bóng bay, nhún nhảy, bắn pháo giấy, mở hộp quà, hát cùng bé.">
+<meta name="theme-color" content="#59bdff">
 <meta name="robots" content="noindex,nofollow">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&text=%E7%93%8A%E5%BA%B5%E5%AF%BA%E5%8D%97%E7%84%A1%E9%98%BF%E5%BD%8C%E9%99%80%E4%BD%9B&display=swap">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
 <header class="dau">
-  <div class="an-trien" aria-hidden="true">瓊<br>庵<br>寺</div>
+  <div class="logo" aria-hidden="true"><svg viewBox="0 0 48 48"><g fill="none" stroke-width="4.2" stroke-linecap="round"><path d="M6 34a18 18 0 0 1 36 0" stroke="#ff5d5d"/><path d="M10.5 34a13.5 13.5 0 0 1 27 0" stroke="#ffd93d"/><path d="M15 34a9 9 0 0 1 18 0" stroke="#43b8ff"/><path d="M19.5 34a4.5 4.5 0 0 1 9 0" stroke="#a66bff"/></g><circle cx="9" cy="37" r="4.5" fill="#fff"/><circle cx="39" cy="37" r="4.5" fill="#fff"/></svg></div>
   <div class="dau-chu">
-    <h1>Quỳnh Am Tự</h1>
-    <p class="chao" id="chao">Nam Mô A Di Đà Phật</p>
+    <h1><span>Công Viên</span> <span class="cv">Cầu Vồng</span></h1>
+    <p class="chao" id="chao">Chào bạn nhỏ!</p>
   </div>
   <button class="nut-nho" id="nutCaiDat" aria-label="Đổi tên và cài đặt">Tên</button>
 </header>
 
 <main>
-  <!-- CHÁNH ĐIỆN -->
+  <!-- QUẢNG TRƯỜNG -->
   <section class="trang" id="t-chanhdien" data-tab="chanhdien">
     <div class="khung-canh san-khau">
-      <canvas id="canh" aria-label="Chánh điện: tượng Phật, đỉnh đồng, thảm đỏ và các bạn đạo ngồi hai bên"></canvas>
+      <canvas id="canh" aria-label="Công viên: cầu vồng, vòng đu quay, ngựa gỗ, cầu trượt, đài phun nước và các bạn đang chơi"></canvas>
       <div class="phu-tren">
         <div class="chip-nhom">
-          <p class="chip"><span class="cham" aria-hidden="true"></span><span id="dangTrongChua">Chánh điện đang mở</span></p>
-          <p class="chip" id="dangChay">Đỉnh đồng chờ nén hương đầu tiên</p>
+          <p class="chip"><span class="cham" aria-hidden="true"></span><span id="dangTrongChua">Công viên đang mở</span></p>
+          <p class="chip" id="dangChay">Chưa có bóng bay nào</p>
         </div>
-        <aside class="bang-vang" aria-label="Tấm lòng thành hôm nay">
-          <p class="bang-vang-tieu">Tấm lòng thành</p>
+        <aside class="bang-vang" aria-label="Bé chăm chơi hôm nay">
+          <p class="bang-vang-tieu">Bé chăm chơi</p>
           <ol id="bangVang"></ol>
         </aside>
       </div>
       <ol class="dong-tin" id="dongTin" aria-live="polite"></ol>
     </div>
     <div class="hanh-le">
-      <button class="le" id="nutHuong">
-        <svg class="bieu" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 30h24l-3 6H11z" fill="#c9974a"/><path d="M6 28h28v3H6z" fill="#e2b25c"/><g stroke="#b5332a" stroke-width="1.6"><path d="M16 28V12"/><path d="M20 28V9"/><path d="M24 28V12"/></g><g fill="#ff9a4a"><circle cx="16" cy="12" r="1.6"/><circle cx="20" cy="9" r="1.6"/><circle cx="24" cy="12" r="1.6"/></g><path d="M20 7c-2-2 2-3 0-5M16 10c-2-2 1-3 0-5M24 10c2-2-1-3 0-5" stroke="#cfd3e0" stroke-width="1" fill="none" opacity=".7"/></svg>
-        <span class="le-ten">Thắp hương</span><span class="le-phu">3 nén</span></button>
-      <button class="le" id="nutMo">
-        <svg class="bieu" viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="18" cy="24" rx="13" ry="10" fill="#a8341f"/><ellipse cx="15" cy="20" rx="6" ry="4" fill="#f08a5a" opacity=".55"/><path d="M8 25q10 6 20 0" stroke="#2a0805" stroke-width="2.2" fill="none"/><path d="M28 8l6 12" stroke="#c9a26a" stroke-width="2.4"/><circle cx="34" cy="21" r="3" fill="#e7d3b0"/></svg>
-        <span class="le-ten">Gõ mõ</span><span class="le-phu" id="demMo">0 tiếng</span></button>
-      <button class="le" id="nutChuong">
-        <svg class="bieu" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3v5" stroke="#8a6a3a" stroke-width="2"/><path d="M13 10q7-4 14 0q1 12 6 20H7q5-8 6-20z" fill="#d6a24c"/><path d="M15 12q2 8-1 16" stroke="#f3d590" stroke-width="2" fill="none" opacity=".8"/><ellipse cx="20" cy="30" rx="13" ry="2.6" fill="#7a5520"/><path d="M3 16q-2 6 0 12M37 16q2 6 0 12" stroke="#e2b25c" stroke-width="1.4" fill="none" opacity=".7"/></svg>
-        <span class="le-ten">Thỉnh chuông</span><span class="le-phu">1 hồi</span></button>
-      <button class="le" id="nutXam">
-        <svg class="bieu" viewBox="0 0 40 40" aria-hidden="true"><g stroke-width="2.2"><path d="M15 26L13 6" stroke="#d9b77a"/><path d="M19 26V3" stroke="#e2b25c"/><path d="M23 26l2-19" stroke="#d9b77a"/></g><path d="M13 6l0 4M19 3v4M25 7l-.4 4" stroke="#9b2f26" stroke-width="2.4"/><path d="M11 18h18l-2 18H13z" fill="#9b2f26"/><path d="M11 18h18" stroke="#e2b25c" stroke-width="2"/></svg>
-        <span class="le-ten">Xin xăm</span><span class="le-phu">1 quẻ</span></button>
+      <button class="le le-do" id="nutHuong">
+        <svg class="bieu" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 26q-2 6 1 12" stroke="#666" stroke-width="1.2" fill="none"/><ellipse cx="14" cy="13" rx="7" ry="8.5" fill="#ff5d73"/><ellipse cx="26" cy="12" rx="7" ry="8.5" fill="#ffd23f"/><ellipse cx="20" cy="18" rx="7" ry="8.5" fill="#3db7ff"/><ellipse cx="17.5" cy="15" rx="2" ry="3" fill="#fff" opacity=".7"/></svg>
+        <span class="le-ten">Thả bóng bay</span><span class="le-phu">3 quả</span></button>
+      <button class="le le-tim" id="nutMo">
+        <svg class="bieu" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 34q12-6 24 0" stroke="#fff" stroke-width="2.5" fill="none" opacity=".8"/><circle cx="20" cy="14" r="8" fill="#ffd9b8"/><path d="M12 13a8 8 0 0 1 16 0q-4-4-8-3-4-1-8 3z" fill="#5a3420"/><circle cx="17" cy="15" r="1.4" fill="#2a1a14"/><circle cx="23" cy="15" r="1.4" fill="#2a1a14"/><path d="M17.5 18.5q2.5 2 5 0" stroke="#8a3a2a" stroke-width="1.2" fill="none"/><path d="M14 22h12l-1 8H15z" fill="#ff9f43"/><path d="M6 8l3 3M34 8l-3 3M20 1v4" stroke="#ffd23f" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span class="le-ten">Nhún nhảy</span><span class="le-phu" id="demMo">0 lần</span></button>
+      <button class="le le-vang" id="nutChuong">
+        <svg class="bieu" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 36L20 12l12 24z" fill="#7b6cff"/><path d="M14 24l12 0M11 30h18" stroke="#ffd23f" stroke-width="2.5"/><g stroke-width="3" stroke-linecap="round"><path d="M20 8V3" stroke="#ff5d73"/><path d="M12 10L9 6" stroke="#3db7ff"/><path d="M28 10l3-4" stroke="#5bd36b"/></g><rect x="5" y="14" width="4" height="2.5" fill="#ff7ec8" transform="rotate(30 7 15)"/><rect x="31" y="15" width="4" height="2.5" fill="#ffd23f" transform="rotate(-25 33 16)"/></svg>
+        <span class="le-ten">Bắn pháo giấy</span><span class="le-phu">cả công viên</span></button>
+      <button class="le le-xanh" id="nutXam">
+        <svg class="bieu" viewBox="0 0 40 40" aria-hidden="true"><rect x="7" y="17" width="26" height="19" rx="3" fill="#ff5d73"/><rect x="5" y="12" width="30" height="7" rx="2.5" fill="#ff7e93"/><rect x="18" y="12" width="4" height="24" fill="#ffd23f"/><path d="M20 12q-8-9-11-3 1 4 11 3zM20 12q8-9 11-3-1 4-11 3z" fill="#ffd23f"/></svg>
+        <span class="le-ten">Hộp quà</span><span class="le-phu">bất ngờ</span></button>
     </div>
-    <div class="the" id="theGio">
-      <p class="nhan">Giờ tu chung của nhóm</p>
+    <div class="the the-gio" id="theGio">
+      <p class="nhan">Giờ chơi chung của nhóm</p>
       <p class="gio" id="gioTuChung"></p>
     </div>
   </section>
 
-  <!-- NIỆM PHẬT -->
+  <!-- BONG BÓNG -->
   <section class="trang" id="t-niem" data-tab="niem" hidden>
-    <label class="chon-cau" for="cauNiem">Câu niệm</label>
+    <label class="chon-cau" for="cauNiem">Bé muốn bắn gì?</label>
     <select id="cauNiem">
-      <option>Nam Mô A Di Đà Phật</option>
-      <option>Nam Mô Quán Thế Âm Bồ Tát</option>
-      <option>Nam Mô Bổn Sư Thích Ca Mâu Ni Phật</option>
-      <option>Nam Mô Dược Sư Lưu Ly Quang Vương Phật</option>
+      <option value="bong bóng">Bong bóng xà phòng</option>
+      <option value="ngôi sao">Ngôi sao lấp lánh</option>
+      <option value="trái tim">Trái tim hồng</option>
+      <option value="kẹo ngọt">Kẹo ngọt</option>
     </select>
-    <button class="chuoi" id="nutNiem" aria-label="Lần một hạt chuỗi">
+    <button class="chuoi" id="nutNiem" aria-label="Chạm để bắn một quả">
       <canvas id="chuoiHat" aria-hidden="true"></canvas>
       <span class="chuoi-giua">
         <span class="so-niem" id="soNiem">0</span>
-        <span class="hat-thu" id="hatThu">hạt 0 / 108</span>
+        <span class="hat-thu" id="hatThu">0 / 100</span>
       </span>
     </button>
-    <p class="goi-y">Chạm vào chuỗi mỗi lần niệm một câu. Đủ 108 hạt chuông ngân một tiếng.</p>
+    <p class="goi-y">Chạm thật nhanh vào vòng tròn. Đủ 100 quả là được một tràng pháo hoa!</p>
     <div class="hai-so">
-      <div><p class="nhan">Hôm nay bạn niệm</p><p class="so" id="niemHomNay">0</p></div>
+      <div><p class="nhan">Hôm nay bé bắn</p><p class="so" id="niemHomNay">0</p></div>
       <div><p class="nhan">Cả nhóm hôm nay</p><p class="so" id="niemNhom">0</p></div>
     </div>
   </section>
 
-  <!-- TỤNG KINH -->
+  <!-- HÁT CÙNG BÉ -->
   <section class="trang" id="t-kinh" data-tab="kinh" hidden>
     <div class="kinh-dau">
-      <h2>Bát Nhã Tâm Kinh</h2>
-      <p class="nhan">Bản phiên âm Hán Việt. Bấm Tụng, mỗi tiếng mõ đọc một chữ.</p>
+      <h2>Bài Hát Cầu Vồng</h2>
+      <p class="nhan">Bấm Hát, mỗi tiếng trống hát một chữ. Chạm vào chữ nào là hát từ chữ đó.</p>
     </div>
     <div class="dieu-khien">
-      <button class="nut-chinh" id="nutTung">Tụng</button>
-      <label for="nhipMo" class="nhip">Nhịp <span id="nhipSo">72</span>/phút</label>
-      <input type="range" id="nhipMo" min="40" max="120" value="72">
+      <button class="nut-chinh" id="nutTung">Hát</button>
+      <label for="nhipMo" class="nhip">Nhịp <span id="nhipSo">104</span>/phút</label>
+      <input type="range" id="nhipMo" min="70" max="140" value="104">
     </div>
     <article class="kinh" id="kinh" lang="vi"></article>
   </section>
 
-  <!-- HOA ĐĂNG -->
+  <!-- BÓNG BAY ĐIỀU ƯỚC -->
   <section class="trang" id="t-hoadang" data-tab="hoadang" hidden>
     <form class="the" id="formHoaDang">
-      <label for="loiNguyen" class="nhan">Lời nguyện gửi theo hoa đăng</label>
-      <textarea id="loiNguyen" maxlength="200" rows="3" placeholder="Nguyện cho mẹ mau khỏe, cả nhà bình an."></textarea>
+      <label for="loiNguyen" class="nhan">Điều ước gửi theo bóng bay</label>
+      <textarea id="loiNguyen" maxlength="200" rows="3" placeholder="Con ước cuối tuần được đi sở thú với cả nhà."></textarea>
       <div class="hang">
         <label class="an-ten"><input type="checkbox" id="anTen"> Ẩn tên</label>
         <span class="dem-chu" id="demChu">0/200</span>
-        <button class="nut-chinh" type="submit">Thả hoa đăng</button>
+        <button class="nut-chinh" type="submit">Thả bóng bay</button>
       </div>
     </form>
     <div class="mat-nuoc" id="matNuoc" aria-hidden="true"></div>
     <ol class="ds-hoadang" id="dsHoaDang"></ol>
   </section>
 
-  <!-- CÔNG ĐỨC -->
+  <!-- BẢNG NGÔI SAO -->
   <section class="trang" id="t-congduc" data-tab="congduc" hidden>
     <div class="chuyen" role="tablist">
       <button role="tab" aria-selected="true" data-pham="homnay">Hôm nay</button>
@@ -125,75 +124,75 @@
     <div class="tong-nhom" id="tongNhom"></div>
     <div class="bang-cuon">
       <table class="bang" id="bangCongDuc">
-        <thead><tr><th>Bạn đạo</th><th>Hương</th><th>Mõ</th><th>Chuông</th><th>Niệm</th><th>Kinh</th><th>Hoa đăng</th></tr></thead>
+        <thead><tr><th>Bạn nhỏ</th><th>Bóng bay</th><th>Nhún</th><th>Pháo giấy</th><th>Bắn</th><th>Bài hát</th><th>Điều ước</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
-    <h2 class="tieu">Nhật ký chùa</h2>
+    <h2 class="tieu">Nhật ký công viên</h2>
     <ol class="nhat-ky" id="nhatKy"></ol>
-    <p class="hoi-huong">Nguyện đem công đức này<br>hướng về khắp tất cả<br>đệ tử và chúng sanh<br>đều trọn thành Phật đạo.</p>
+    <p class="hoi-huong">Chơi vui, chơi ngoan, nhớ uống nước<br>và rửa tay sạch sẽ nhé!</p>
   </section>
 </main>
 
 <p class="trang-thai" id="trangThai" role="status"></p>
 
 <div class="may-kinh" id="mayKinh">
-  <button class="nut-phat" id="nutPhat" aria-label="Phát tiếng tụng kinh">
+  <button class="nut-phat" id="nutPhat" aria-label="Phát nhạc">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path class="hinh-phat" d="M8 5v14l11-7z"/><g class="hinh-dung"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></g></svg>
   </button>
   <div class="may-chu">
-    <select id="chonBai" aria-label="Chọn bài tụng">
-      <option value="thoikinh">Thời kinh: Tâm Kinh, niệm Phật, hồi hướng</option>
-      <option value="kinh">Bát Nhã Tâm Kinh</option>
-      <option value="niem">Niệm Phật liên tục</option>
+    <select id="chonBai" aria-label="Chọn nhạc">
+      <option value="thoikinh">Cả buổi chơi: hát, đếm số, nhạc vui</option>
+      <option value="kinh">Bài Hát Cầu Vồng</option>
+      <option value="niem">Nhạc vui không lời</option>
     </select>
-    <span class="may-dong" id="mayDong">Chạm màn hình để nghe tụng kinh</span>
+    <span class="may-dong" id="mayDong">Chạm màn hình để nghe nhạc</span>
   </div>
-  <label class="am-luong" for="amLuong" aria-label="Âm lượng tiếng tụng">
+  <label class="am-luong" for="amLuong" aria-label="Âm lượng nhạc">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9q2 3 0 6M18.5 7q4 5 0 10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
     <input type="range" id="amLuong" min="0" max="1" step="0.05" value="0.55">
   </label>
 </div>
 
-<nav class="duoi" aria-label="Các gian trong chùa">
-  <button data-di="chanhdien" aria-current="page">Chánh điện</button>
-  <button data-di="niem">Niệm Phật</button>
-  <button data-di="kinh">Tụng kinh</button>
-  <button data-di="hoadang">Hoa đăng</button>
-  <button data-di="congduc">Công đức</button>
+<nav class="duoi" aria-label="Các khu trong công viên">
+  <button data-di="chanhdien" aria-current="page"><b class="ic" aria-hidden="true">🎡</b>Công viên</button>
+  <button data-di="niem"><b class="ic" aria-hidden="true">🫧</b>Bong bóng</button>
+  <button data-di="kinh"><b class="ic" aria-hidden="true">🎵</b>Hát</button>
+  <button data-di="hoadang"><b class="ic" aria-hidden="true">🎈</b>Điều ước</button>
+  <button data-di="congduc"><b class="ic" aria-hidden="true">⭐</b>Ngôi sao</button>
 </nav>
 
-<!-- Hộp vào chùa -->
+<!-- Hộp vào công viên -->
 <dialog id="hopVao">
   <form method="dialog" id="formVao">
-    <div class="an-trien lon" aria-hidden="true">瓊<br>庵<br>寺</div>
-    <h2>Mời bạn vào chùa</h2>
-    <p>Tên này hiện trong sổ công đức để cả nhóm biết ai đang cùng tu.</p>
-    <label for="tenBan">Tên hoặc pháp danh</label>
-    <input id="tenBan" maxlength="30" required autocomplete="nickname" placeholder="Ví dụ: Diệu Hạnh">
+    <div class="logo lon" aria-hidden="true"><svg viewBox="0 0 48 48"><g fill="none" stroke-width="4.2" stroke-linecap="round"><path d="M6 34a18 18 0 0 1 36 0" stroke="#ff5d5d"/><path d="M10.5 34a13.5 13.5 0 0 1 27 0" stroke="#ffd93d"/><path d="M15 34a9 9 0 0 1 18 0" stroke="#43b8ff"/><path d="M19.5 34a4.5 4.5 0 0 1 9 0" stroke="#a66bff"/></g><circle cx="9" cy="37" r="4.5" fill="#fff"/><circle cx="39" cy="37" r="4.5" fill="#fff"/></svg></div>
+    <h2>Chào mừng tới Công Viên Cầu Vồng!</h2>
+    <p>Tên của bé sẽ hiện trên đầu nhân vật để các bạn nhận ra nhau.</p>
+    <label for="tenBan">Tên của bé</label>
+    <input id="tenBan" maxlength="30" required autocomplete="nickname" placeholder="Ví dụ: Bông">
     <div id="khoiMa">
-      <label for="maChua">Mã vào chùa</label>
+      <label for="maChua">Mã vào cổng</label>
       <input id="maChua" maxlength="60" autocomplete="off" placeholder="Hỏi trong nhóm Zalo">
     </div>
-    <label class="an-ten tieng" for="batTieng"><input type="checkbox" id="batTieng" checked> Bật tiếng mõ, chuông</label>
-    <label class="an-ten tieng" for="tuPhat"><input type="checkbox" id="tuPhat" checked> Mở chùa là nghe tụng kinh</label>
+    <label class="an-ten tieng" for="batTieng"><input type="checkbox" id="batTieng" checked> Bật tiếng hiệu ứng</label>
+    <label class="an-ten tieng" for="tuPhat"><input type="checkbox" id="tuPhat" checked> Vào công viên là có nhạc</label>
     <p class="loi" id="loiVao"></p>
-    <button class="nut-chinh" id="nutVao" value="vao">Vào chùa</button>
+    <button class="nut-chinh" id="nutVao" value="vao">Vào chơi thôi!</button>
   </form>
 </dialog>
 
-<!-- Hộp quẻ xăm -->
+<!-- Hộp quà -->
 <dialog id="hopXam">
-  <div class="ong-xam" id="ongXam" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="hop-qua" id="ongXam" aria-hidden="true"><span class="nap"></span><span class="than"></span></div>
   <div id="noiDungXam"></div>
-  <form method="dialog"><button class="nut-chinh">Nam Mô A Di Đà Phật</button></form>
+  <form method="dialog"><button class="nut-chinh">Cảm ơn nha!</button></form>
 </dialog>
 
-<script src="config.js?v=3"></script>
-<script src="data.js?v=3"></script>
-<script src="audio.js?v=3"></script>
-<script src="scene.js?v=3"></script>
-<script src="api.js?v=3"></script>
-<script src="app.js?v=3"></script>
+<script src="config.js?v=4"></script>
+<script src="data.js?v=4"></script>
+<script src="audio.js?v=4"></script>
+<script src="scene.js?v=4"></script>
+<script src="api.js?v=4"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>

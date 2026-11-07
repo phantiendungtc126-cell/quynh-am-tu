@@ -1,57 +1,34 @@
-// Kinh văn và quẻ xăm của Quỳnh Am Tự.
+// Bài hát và hộp quà của Công Viên Cầu Vồng. Lời bài hát viết riêng cho công viên.
 window.KINH = {
-  ten: 'Ma Ha Bát Nhã Ba La Mật Đa Tâm Kinh',
-  // Phiên âm Hán Việt (bản dịch chữ Hán của ngài Huyền Trang). Mỗi phần tử là một đoạn.
+  ten: 'Bài Hát Cầu Vồng',
   doan: [
-    'Quán Tự Tại Bồ Tát hành thâm Bát Nhã Ba La Mật Đa thời, chiếu kiến ngũ uẩn giai không, độ nhất thiết khổ ách.',
-    'Xá Lợi Tử, sắc bất dị không, không bất dị sắc, sắc tức thị không, không tức thị sắc, thọ tưởng hành thức diệc phục như thị.',
-    'Xá Lợi Tử, thị chư pháp không tướng, bất sanh bất diệt, bất cấu bất tịnh, bất tăng bất giảm.',
-    'Thị cố không trung vô sắc, vô thọ tưởng hành thức, vô nhãn nhĩ tỷ thiệt thân ý, vô sắc thanh hương vị xúc pháp, vô nhãn giới nãi chí vô ý thức giới, vô vô minh diệc vô vô minh tận, nãi chí vô lão tử diệc vô lão tử tận, vô khổ tập diệt đạo, vô trí diệc vô đắc.',
-    'Dĩ vô sở đắc cố, Bồ Đề Tát Đỏa y Bát Nhã Ba La Mật Đa cố, tâm vô quái ngại, vô quái ngại cố, vô hữu khủng bố, viễn ly điên đảo mộng tưởng, cứu cánh Niết Bàn.',
-    'Tam thế chư Phật, y Bát Nhã Ba La Mật Đa cố, đắc A Nậu Đa La Tam Miệu Tam Bồ Đề.',
-    'Cố tri Bát Nhã Ba La Mật Đa, thị đại thần chú, thị đại minh chú, thị vô thượng chú, thị vô đẳng đẳng chú, năng trừ nhất thiết khổ, chân thật bất hư.',
-    'Cố thuyết Bát Nhã Ba La Mật Đa chú, tức thuyết chú viết:',
-    'Yết đế, yết đế, ba la yết đế, ba la tăng yết đế, Bồ Đề tát bà ha.',
-    'Ma Ha Bát Nhã Ba La Mật Đa.',
+    'Cầu vồng bảy sắc, cong cong trên trời.',
+    'Đỏ cam vàng lục, lam chàm tím ơi.',
+    'Bé đi công viên, nắng vàng tươi vui.',
+    'Đu quay quay tròn, cầu trượt vèo vèo.',
+    'Bóng bay xanh đỏ, bay lên cao cao.',
+    'Bạn bè nắm tay, cùng nhau hát ca.',
+    'Chơi xong ngoan ngoãn, về nhà với mẹ.',
+    'Ngày mai mình lại, gặp nhau nhé ơi!',
   ],
 };
 
-// 12 quẻ xăm của chùa. Thơ lục bát, lời bàn ngắn để bạn đạo tự suy ngẫm.
-window.QUE_XAM = [
-  { so: 'Nhất', bac: 'Thượng cát',
-    tho: ['Trăng lên đầu núi sáng soi,', 'Đường xa mấy nẻo cũng vơi gót hài.', 'Lòng ngay chẳng sợ chông gai,', 'Việc lành gieo sớm, quả mai sẽ tròn.'],
-    ban: 'Việc đang tính có người giúp sức. Cứ làm ngay thẳng, kết quả sẽ tốt.' },
-  { so: 'Nhị', bac: 'Trung cát',
-    tho: ['Mưa qua lá trúc còn xanh,', 'Gió lay mấy độ mà cành vẫn yên.', 'Chậm thôi, đừng vội ưu phiền,', 'Đợi trời quang tạnh, thuyền liền sang sông.'],
-    ban: 'Việc có trắc trở nhỏ. Nên chờ thêm ít lâu, chưa vội quyết.' },
-  { so: 'Tam', bac: 'Thượng cát',
-    tho: ['Quỳnh nở giữa đêm thanh vắng,', 'Hương bay khắp ngõ, nhà ai cũng hay.', 'Phúc dày từ những việc nay,', 'Một lời tử tế, đong đầy về sau.'],
-    ban: 'Gia đạo êm ấm, sắp có tin vui. Giữ lời nói hiền hòa trong nhà.' },
-  { so: 'Tứ', bac: 'Bình',
-    tho: ['Nước đầy thì phải tràn ly,', 'Biết dừng đúng lúc, việc gì cũng xong.', 'Tham nhiều dễ rối trong lòng,', 'Vừa đủ là phúc, thong dong là giàu.'],
-    ban: 'Chuyện tiền bạc nên giữ chừng mực, đừng làm liều vì ham lời.' },
-  { so: 'Ngũ', bac: 'Thượng cát',
-    tho: ['Thuyền về bến cũ trăng trong,', 'Người xa nhắn gửi tấm lòng thủy chung.', 'Duyên lành chẳng phải đi tìm,', 'Mở lòng ra đón, tự nhiên sẽ gần.'],
-    ban: 'Tình cảm, bạn bè có tin tốt. Chủ động hỏi thăm người lâu ngày không gặp.' },
-  { so: 'Lục', bac: 'Trung cát',
-    tho: ['Hạt gieo chưa thấy mầm lên,', 'Đừng vì nắng hạn mà quên tưới cành.', 'Công phu ngày một ngày thành,', 'Mùa sau lúa trổ xanh xanh đầy đồng.'],
-    ban: 'Học hành, công việc cần bền bỉ. Kết quả đến muộn nhưng chắc chắn.' },
-  { so: 'Thất', bac: 'Bình',
-    tho: ['Mây che một chốc rồi tan,', 'Gió đưa lời nói muôn ngàn dặm xa.', 'Giữ lời ăn tiếng nói ra,', 'Chuyện người chớ kể, chuyện ta chớ phiền.'],
-    ban: 'Dễ có hiểu lầm vì lời nói. Bớt nói, nghe nhiều, giận thì để mai hẵng nói.' },
-  { so: 'Bát', bac: 'Thượng cát',
-    tho: ['Đèn khuya một ngọn sáng ngời,', 'Soi người lạc lối tìm nơi về nhà.', 'Giúp người là giúp chính ta,', 'Một hạt công đức nở ra vạn hoa.'],
-    ban: 'Sắp có dịp giúp đỡ người khác. Cứ giúp hết lòng, phúc sẽ quay về.' },
-  { so: 'Cửu', bac: 'Trung cát',
-    tho: ['Sông sâu nhờ có con đò,', 'Đường xa nhờ bạn, việc to nhờ người.', 'Một mình khó dựng nên đời,', 'Chung tay một chút, việc thời dễ xong.'],
-    ban: 'Việc lớn nên bàn với người thân, bạn bè. Đừng ôm một mình.' },
-  { so: 'Thập', bac: 'Bình',
-    tho: ['Lá vàng rụng xuống gốc cây,', 'Để mùa xuân tới chồi đầy nhánh non.', 'Mất đây mà được cái còn,', 'Buông điều đã cũ, lòng son nhẹ nhàng.'],
-    ban: 'Có chuyện phải buông bỏ. Chấp nhận được thì nhẹ lòng, rồi sẽ có cái mới tốt hơn.' },
-  { so: 'Thập Nhất', bac: 'Thượng cát',
-    tho: ['Chuông chùa vọng sáng tinh sương,', 'Thân tâm an lạc, mọi đường hanh thông.', 'Khỏe như núi, mát như sông,', 'Ăn ngay ngủ kỹ, chẳng mong gì hơn.'],
-    ban: 'Sức khỏe tốt, tinh thần vững. Giữ nếp ăn ngủ điều độ là đủ.' },
-  { so: 'Thập Nhị', bac: 'Trung cát',
-    tho: ['Đường lên núi có quanh co,', 'Bước chậm mà vững, chẳng lo trượt chân.', 'Đỉnh cao chẳng ở xa gần,', 'Ở nơi lòng biết mỗi lần bước thêm.'],
-    ban: 'Mục tiêu sẽ tới nếu đi từng bước. Đừng đem mình so với người.' },
+// Bài đếm số và lời chào, phát trong "Cả buổi chơi"
+window.DEM_SO = 'Một, hai, ba, bốn, năm, sáu, bảy, tám, chín, mười.';
+window.TAM_BIET = 'Tạm biệt các bạn, hẹn gặp lại nhé!';
+
+// 12 hộp quà bất ngờ: món quà, lời chúc và một việc nhỏ làm trong ngày.
+window.QUA = [
+  { so: 'Gấu bông', bac: 'Quà ôm ấp', hinh: '🧸', tho: ['Một chú gấu bông mềm mại', 'Ôm vào là thấy ấm ngay.'], ban: 'Hôm nay nhớ ôm bố mẹ một cái thật chặt.' },
+  { so: 'Kem dâu', bac: 'Quà mát lạnh', hinh: '🍦', tho: ['Que kem dâu mát lạnh', 'Ăn chậm thôi kẻo buốt răng.'], ban: 'Uống đủ nước và rửa tay trước khi ăn nhé.' },
+  { so: 'Bóng bay', bac: 'Quà bay cao', hinh: '🎈', tho: ['Quả bóng đỏ bay lên', 'Mang ước mơ của bé.'], ban: 'Kể cho bạn nghe một điều bé mơ ước.' },
+  { so: 'Ngôi sao', bac: 'Quà lấp lánh', hinh: '⭐', tho: ['Ngôi sao vàng lấp lánh', 'Dành cho bé ngoan nhất.'], ban: 'Hôm nay tự cất đồ chơi gọn gàng nhé.' },
+  { so: 'Bút màu', bac: 'Quà sáng tạo', hinh: '🖍️', tho: ['Hộp bút màu bảy sắc', 'Vẽ cầu vồng thật xinh.'], ban: 'Vẽ một bức tranh tặng người bé thương.' },
+  { so: 'Quả bóng', bac: 'Quà vận động', hinh: '⚽', tho: ['Quả bóng tròn lăn lăn', 'Chạy theo cho khỏe chân.'], ban: 'Ra sân chạy nhảy mười phút cho khỏe.' },
+  { so: 'Cuốn truyện', bac: 'Quà thông minh', hinh: '📘', tho: ['Cuốn truyện tranh thật hay', 'Mở ra là thấy vui.'], ban: 'Tối nay nhờ bố mẹ đọc cho nghe một truyện.' },
+  { so: 'Bánh kem', bac: 'Quà ngọt ngào', hinh: '🎂', tho: ['Chiếc bánh kem nho nhỏ', 'Chia cho bạn cùng ăn.'], ban: 'Chia sẻ đồ ăn với bạn bè nhé.' },
+  { so: 'Chú mèo', bac: 'Quà đáng yêu', hinh: '🐱', tho: ['Chú mèo kêu meo meo', 'Đòi bé chơi cùng đây.'], ban: 'Nhẹ nhàng với các con vật quanh mình.' },
+  { so: 'Cây non', bac: 'Quà xanh mát', hinh: '🌱', tho: ['Một mầm cây bé xíu', 'Tưới nước là lớn nhanh.'], ban: 'Hôm nay tưới cây giúp mẹ nhé.' },
+  { so: 'Tên lửa', bac: 'Quà phiêu lưu', hinh: '🚀', tho: ['Tên lửa bay vút lên', 'Thăm trăng sao trên trời.'], ban: 'Hỏi bố mẹ: vì sao trời có sao?' },
+  { so: 'Cầu vồng', bac: 'Quà đặc biệt', hinh: '🌈', tho: ['Cầu vồng sau cơn mưa', 'Bé cười là nắng lên.'], ban: 'Nói lời cảm ơn với ba người hôm nay.' },
 ];
