@@ -1,0 +1,12 @@
+{
+  "name": "cau-noi-tiktok-cong-vien-cau-vong",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cầu nối đưa bình luận, tim, quà từ TikTok Live vào Công Viên Cầu Vồng",
+  "main": "cau-noi.js",
+  "scripts": { "start": "node cau-noi.js" },
+  "dependencies": {
+    "tiktok-live-connector": "2.5.0",
+    "ws": "8.18.3"
+  }
+}
