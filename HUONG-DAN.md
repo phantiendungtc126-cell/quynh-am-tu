@@ -39,9 +39,13 @@ https://phantiendungtc126-cell.github.io/quynh-am-tu/#ma=<mã vào cổng>
 - Điểm "hôm nay" tính theo giờ Việt Nam, qua 0 giờ thì về 0.
 - Nhún nhảy và bắn bong bóng được gom lại vài giây mới gửi một lần, nên máy các bạn khác thấy chậm khoảng 20 giây.
 
+## Live TikTok
+
+Mở `…/quynh-am-tu/?live&demo` để xem thử chế độ live. Cách đưa công viên lên TikTok LIVE Studio/OBS và bật cầu nối nhận bình luận, tim, quà: xem [cong-cu/cau-noi-tiktok/HUONG-DAN-LIVE.md](cong-cu/cau-noi-tiktok/HUONG-DAN-LIVE.md).
+
 ## Nhạc
 
-Nhạc nền là các giai điệu thiếu nhi đã hết bản quyền (Twinkle Twinkle Little Star, Frère Jacques, Mary Had a Little Lamb, London Bridge, Old MacDonald, Row Row Row Your Boat, Ode to Joy). Trang tự chơi bằng tiếng hộp nhạc, không dùng file ghi âm nên không vướng bản quyền.
+Nhạc nền gồm 2 bài tự soạn ("Cầu Vồng Nhảy Nhót", "Kem Mát Lạnh") và các giai điệu thiếu nhi đã hết bản quyền (Twinkle Twinkle Little Star, Frère Jacques, Mary Had a Little Lamb, London Bridge, Old MacDonald, Ode to Joy, Row Row Row Your Boat). Trang tự phối và chơi: kiểu pop/EDM sôi động (trống điện tử, bass, synth), hoặc hộp nhạc ru êm. Không dùng file ghi âm nên không vướng bản quyền.
 
 - Danh sách bài nằm trong `data.js` (`BAI_NHAC`): mỗi bài là chuỗi nốt `C5:1` (nốt:số phách) và hợp âm.
 - Lời karaoke nằm trong `KINH` của `data.js`: 6 câu, mỗi câu 7 chữ, khớp 42 nốt của bài Ngôi sao nhỏ.

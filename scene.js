@@ -438,8 +438,8 @@ window.Canh = (() => {
     const nayDi = n.di ? Math.abs(Math.sin(t * 0.012 + n.pha)) * h * 0.06 : Math.abs(Math.sin(t * 0.003 + n.pha)) * h * 0.015;
     const nhay = n.nhay > 0 ? Math.sin((1 - n.nhay / 700) * Math.PI) * h * 0.45 : 0;
     const y = n.y - nayDi - nhay;
-    if (chiTen) { veTen(n, x, y - h * 1.02, sc); return; }
-    const k = bam(n.ten), ao = MAU[k % MAU.length], quan = MAU[(k >> 3) % MAU.length], toc = TOC[(k >> 5) % TOC.length], da = DA[(k >> 7) % DA.length], kieu = (k >> 9) % 4;
+    if (chiTen) { veTen(n, x, y - h * 1.02, sc); if (n.loi && performance.now() < n.loiDen) veLoi(n.loi, x, y - h * 1.02 - 14 * Math.max(0.8, sc), sc); return; }
+    const k = bam(n.ten), ao = MAU[k % MAU.length], quan = MAU[(k >>> 3) % MAU.length], toc = TOC[(k >>> 5) % TOC.length], da = DA[(k >>> 7) % DA.length], kieu = (k >>> 9) % 4;
     // bóng dưới chân (không nhảy theo)
     g.fillStyle = 'rgba(0,60,0,0.22)'; g.beginPath(); g.ellipse(x, n.y + 1, h * 0.26 * (1 - nhay / h * 0.5), h * 0.07, 0, 0, Math.PI * 2); g.fill();
     // chân bước
@@ -509,6 +509,21 @@ window.Canh = (() => {
     x.beginPath();
     for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; x.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr); }
     x.closePath();
+  }
+
+  // bong bóng thoại trên đầu (bình luận của người xem live)
+  function veLoi(chu, x, y, sc) {
+    const fs = Math.max(10, 12 * Math.min(1.1, sc));
+    g.font = `700 ${fs}px 'Nunito', sans-serif`;
+    const tw = Math.min(W * 0.5, g.measureText(chu).width + 16), th = fs * 1.7;
+    let bx = Math.max(4, Math.min(W - tw - 4, x - tw / 2));
+    g.fillStyle = 'rgba(0,0,0,0.12)'; g.beginPath(); g.roundRect ? g.roundRect(bx + 1, y - th + 2, tw, th, th / 2) : g.rect(bx, y - th, tw, th); g.fill();
+    g.fillStyle = '#fff'; g.beginPath(); g.roundRect ? g.roundRect(bx, y - th, tw, th, th / 2) : g.rect(bx, y - th, tw, th); g.fill();
+    g.beginPath(); g.moveTo(x - 5, y - 1); g.lineTo(x + 5, y - 1); g.lineTo(x, y + 6); g.fill();
+    g.fillStyle = '#2b3a67'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    let t = chu; while (g.measureText(t).width > tw - 14 && t.length > 2) t = t.slice(0, -2);
+    if (t !== chu) t = t.slice(0, -1) + '…';
+    g.fillText(t, bx + tw / 2, y - th / 2);
   }
 
   function veTen(n, x, y, sc) {
@@ -645,6 +660,9 @@ window.Canh = (() => {
   const api = {
     batDau, dung, onCham: null,
     datNhang(ds) { soBong = ds.length; },
+    noi(ten, chu) { const n = nguoi.find(v => v.ten === ten); if (n && chu) { n.loi = String(chu).slice(0, 60); n.loiDen = performance.now() + 6000; } },
+    thaTu(ten, so) { const n = nguoi.find(v => v.ten === ten); if (n && n.x != null) thaBong(n.x, n.y - H * 0.1, so || 1); else thaBong(rnd(W * 0.2, W * 0.8), H * 0.8, so || 1); },
+    phaoHoa(so) { for (let i = 0; i < (so || 1); i++) setTimeout(() => banPhao(rnd(W * 0.15, W * 0.85), rnd(H * 0.25, H * 0.55), 45), i * 350); },
     camMon(ten, mon) { const n = nguoi.find(v => v.ten === ten); if (n && mon) { n.mon = mon; n.monDen = performance.now() + 60000; } },
     datNguoi(ds) {
       const cu = new Map(nguoi.map(n => [n.ten, n]));

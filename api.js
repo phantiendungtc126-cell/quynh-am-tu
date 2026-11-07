@@ -1,7 +1,7 @@
 // Nói chuyện với Apps Script (Google Sheet). Không có API_URL thì dùng bản thử lưu trên máy.
 window.Api = (() => {
-  // ?thu trên địa chỉ trang: chạy thử, không ghi vào sổ ngôi sao thật
-  const URL_API = /[?&]thu\b/.test(location.search) ? '' : (window.CHUA && CHUA.API_URL || '').trim();
+  // ?thu (chạy thử) hoặc ?live (phát live): không ghi vào sổ ngôi sao thật
+  const URL_API = /[?&](thu|live)\b/.test(location.search) ? '' : (window.CHUA && CHUA.API_URL || '').trim();
   const LOAI = ['huong', 'mo', 'chuong', 'niem', 'kinh', 'hoadang', 'xam', 'kem', 'nuoc', 'gap'];
 
   function ngayVN(ms) {

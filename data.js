@@ -12,16 +12,24 @@ window.KINH = {
   ],
 };
 
-// Nhạc thiếu nhi: giai điệu dân gian và cổ điển đã thuộc phạm vi công cộng, trang tự chơi bằng tiếng hộp nhạc.
+// Nhạc: 2 bài tự soạn cho công viên + giai điệu dân gian, cổ điển đã thuộc phạm vi công cộng.
+// Trang tự phối và chơi (pop/EDM sôi động, hoặc hộp nhạc ru êm), không dùng file ghi âm.
 // not: "nốt:số phách" (bỏ :số là 1 phách, R là nghỉ); hop: hợp âm theo từng nhóm hopNhip phách.
+// karaoke: bài dùng cho gian Hát; ru: có trong nhạc ru; chiRu: chỉ dùng cho nhạc ru.
 window.BAI_NHAC = [
-  { ten: 'Ngôi sao nhỏ (Twinkle Twinkle Little Star)', nhip: 100, hopNhip: 2,
+  { ten: 'Cầu Vồng Nhảy Nhót (tự soạn)', nhip: 124, hopNhip: 4,
+    not: 'E5:.5 G5:.5 A5:.5 G5:.5 E5 C5 D5:.5 E5:.5 G5:.5 E5:.5 D5:2 C5:.5 E5:.5 A5:.5 G5:.5 E5 C5 F5:.5 E5:.5 D5:.5 C5:.5 D5:2 E5:.5 G5:.5 C6:.5 B5:.5 A5 G5 B5:.5 A5:.5 G5:.5 E5:.5 D5:2 F5:.5 A5:.5 G5:.5 F5:.5 E5:.5 D5:.5 C5 D5 G5 C5:2',
+    hop: 'C G Am F C G F G' },
+  { ten: 'Kem Mát Lạnh (tự soạn)', nhip: 128, hopNhip: 4,
+    not: 'A4:.5 C5:.5 E5:.5 A5:.5 G5 E5 F5:.5 E5:.5 C5:.5 A4:.5 C5:2 G4:.5 C5:.5 E5:.5 G5:.5 E5 C5 D5:.5 E5:.5 D5:.5 B4:.5 G4:2 A4:.5 A4:.5 C5:.5 E5:.5 A5:.5 G5:.5 E5 F5 E5:.5 C5:.5 A4:2 E5:.5 G5:.5 C6 B5:.5 G5:.5 E5 D5:.5 B4:.5 G4 R:2',
+    hop: 'Am F C G Am F C G' },
+  { ten: 'Ngôi sao nhỏ (Twinkle Twinkle Little Star)', nhip: 120, hopNhip: 2, karaoke: true, ru: true,
     not: 'C5 C5 G5 G5 A5 A5 G5:2 F5 F5 E5 E5 D5 D5 C5:2 G5 G5 F5 F5 E5 E5 D5:2 G5 G5 F5 F5 E5 E5 D5:2 C5 C5 G5 G5 A5 A5 G5:2 F5 F5 E5 E5 D5 D5 C5:2',
     hop: 'C C F C F C G C C G C G C G C G C C F C F C G C' },
-  { ten: 'Kìa con bướm vàng (Frère Jacques)', nhip: 112, hopNhip: 2,
+  { ten: 'Kìa con bướm vàng (Frère Jacques)', nhip: 124, hopNhip: 2, ru: true,
     not: 'C5 D5 E5 C5 C5 D5 E5 C5 E5 F5 G5:2 E5 F5 G5:2 G5:.5 A5:.5 G5:.5 F5:.5 E5 C5 G5:.5 A5:.5 G5:.5 F5:.5 E5 C5 C5 G4 C5:2 C5 G4 C5:2',
     hop: 'C C C C C C C C C C C C G C G C' },
-  { ten: 'Chú cừu nhỏ (Mary Had a Little Lamb)', nhip: 112, hopNhip: 2,
+  { ten: 'Chú cừu nhỏ (Mary Had a Little Lamb)', nhip: 124, hopNhip: 2, ru: true,
     not: 'E5 D5 C5 D5 E5 E5 E5:2 D5 D5 D5:2 E5 G5 G5:2 E5 D5 C5 D5 E5 E5 E5 E5 D5 D5 E5 D5 C5:4',
     hop: 'C C C C G G C C C C C C G G C C' },
   { ten: 'Cầu London (London Bridge)', nhip: 108, hopNhip: 2,
@@ -30,10 +38,10 @@ window.BAI_NHAC = [
   { ten: 'Nông trại vui vẻ (Old MacDonald)', nhip: 116, hopNhip: 2,
     not: 'C5 C5 C5 G4 A4 A4 G4:2 E5 E5 D5 D5 C5:3 G4 C5 C5 C5 G4 A4 A4 G4:2 E5 E5 D5 D5 C5:4',
     hop: 'C C F C C G C C C C F C C G C C' },
-  { ten: 'Chèo thuyền (Row Row Row Your Boat)', nhip: 104, hopNhip: 1.5,
+  { ten: 'Chèo thuyền (Row Row Row Your Boat)', nhip: 96, hopNhip: 1.5, ru: true, chiRu: true,
     not: 'C5:1.5 C5:1.5 C5 D5:.5 E5:1.5 E5 D5:.5 E5 F5:.5 G5:3 C6:.5 C6:.5 C6:.5 G5:.5 G5:.5 G5:.5 E5:.5 E5:.5 E5:.5 C5:.5 C5:.5 C5:.5 G5 F5:.5 E5 D5:.5 C5:3',
     hop: 'C C C C C C C C C C C C G G C C' },
-  { ten: 'Khúc ca vui (Ode to Joy)', nhip: 112, hopNhip: 2,
+  { ten: 'Khúc ca vui (Ode to Joy)', nhip: 124, hopNhip: 2,
     not: 'E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 E5:1.5 D5:.5 D5:2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5:1.5 C5:.5 C5:2 D5 D5 E5 C5 D5 E5:.5 F5:.5 E5 C5 D5 E5:.5 F5:.5 E5 D5 C5 D5 G4:2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5:1.5 C5:.5 C5:2',
     hop: 'C C C G C C G G C C C G C C G C G C G C G C C G C C C G C C G C' },
 ];

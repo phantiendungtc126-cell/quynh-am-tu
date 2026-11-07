@@ -149,6 +149,7 @@
   }
 
   function veSanKhau() {
+    if (window.LIVE && LIVE.bat) { Canh.datNguoi([]); LIVE.ve(); return; }   // chế độ live tự vẽ bảng và người
     const tatCa = bangNguoi('tatca'), homNay = bangNguoi('homnay');
     const bay = Date.now();
     const gan = new Set(S.nhatKy.filter(k => bay - k.t < 15 * 60000).map(k => k.ten));
