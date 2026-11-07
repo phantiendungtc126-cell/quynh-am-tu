@@ -84,13 +84,68 @@ h2 { font-family: var(--chu-hien); font-weight: 700; font-size: 24px; margin: 0;
 
 /* ---------- Chánh điện ---------- */
 .khung-canh { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--muc-3); background: #0a0e1a; }
-#canh { display: block; width: 100%; aspect-ratio: 4 / 5; max-width: 100%; touch-action: manipulation; }
-.dang-chay {
-  position: absolute; left: 0; right: 0; bottom: 0; margin: 0;
-  padding: 18px 14px 10px; font-size: 13px; color: var(--quynh);
-  background: linear-gradient(transparent, #0a0e1acc);
-  text-align: center;
+.san-khau { height: max(430px, calc(100dvh - 290px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))); max-height: 900px; }
+#canh { display: block; width: 100%; height: 100%; max-width: 100%; touch-action: manipulation; }
+
+/* lớp thông tin đè trên cảnh */
+.phu-tren {
+  position: absolute; left: 8px; right: 8px; top: 8px;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
+  pointer-events: none;
 }
+.chip-nhom { display: grid; gap: 6px; min-width: 0; }
+.chip {
+  margin: 0; display: flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 999px; font-size: 11.5px; line-height: 1.3; color: #fbecc8;
+  background: #12080acc; border: 1px solid #c9974a66; backdrop-filter: blur(6px);
+  max-width: 58vw; width: max-content; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.cham { width: 7px; height: 7px; border-radius: 50%; background: #ff5a4a; box-shadow: 0 0 6px #ff5a4a; flex: none; animation: nhapNhay 1.6s ease-in-out infinite; }
+@keyframes nhapNhay { 50% { opacity: .35; } }
+.bang-vang {
+  flex: none; width: 164px; padding: 6px 7px 5px; border-radius: 10px;
+  background: linear-gradient(180deg, #2a0f0bdd, #140708dd);
+  border: 1px solid #d9a95a; box-shadow: 0 6px 18px -6px #000c, inset 0 0 0 1px #00000080;
+  backdrop-filter: blur(6px);
+}
+.bang-vang-tieu { margin: 0 0 2px; text-align: center; font-family: var(--chu-hien); font-weight: 700; font-size: 13px; letter-spacing: .06em; white-space: nowrap; text-transform: uppercase; color: #f3cf7f; }
+.bang-vang ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
+.bang-vang li { display: grid; grid-template-columns: 15px 18px 1fr auto; gap: 4px; align-items: center; font-size: 11px; line-height: 1.2; color: #fbecc8; padding: 1px 3px; border-radius: 6px; }
+.bang-vang li .vong-ten { width: 18px; height: 18px; font-size: 8px; }
+.bang-vang li .hang-so { width: 15px; height: 15px; font-size: 9px; }
+.bang-vang li:first-child { background: #d9a95a26; }
+.bang-vang .hang-so { width: 16px; height: 16px; border-radius: 50%; display: grid; place-items: center; font-size: 10px; font-weight: 700; color: #241806; background: #e2b25c; }
+.bang-vang li:nth-child(2) .hang-so { background: #c9ccd6; }
+.bang-vang li:nth-child(3) .hang-so { background: #c98a52; }
+.vong-ten { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 9px; font-weight: 700; color: #fff; background: #5a3a2a; border: 1px solid #d9a95a88; }
+.bang-vang .ten-bv { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bang-vang .diem { color: #f3cf7f; font-variant-numeric: tabular-nums; font-weight: 600; }
+.bang-vang .trong-bv { grid-template-columns: 1fr; color: #c9b48f; text-align: center; font-size: 11px; }
+
+.dong-tin {
+  position: absolute; left: 8px; top: 47%; margin: 0; padding: 0; list-style: none;
+  display: grid; gap: 6px; width: min(62%, 240px); pointer-events: none;
+}
+.dong-tin li {
+  display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: center;
+  padding: 5px 10px 5px 5px; border-radius: 999px;
+  background: linear-gradient(90deg, #22100cf2, #1a0b0ad9); border: 1px solid #c9974a88;
+  box-shadow: 0 4px 12px -4px #000c;
+  color: #fbecc8; font-size: 12px; line-height: 1.25;
+  animation: truotVao .5s ease-out both, mo 1s ease-in 7s forwards;
+}
+.dong-tin .vong-ten { width: 28px; height: 28px; font-size: 11px; }
+.dong-tin b { color: #ffe7ad; font-weight: 600; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dong-tin small { color: #d9c6a2; font-size: 11px; }
+@keyframes truotVao { from { transform: translateX(-30px); opacity: 0; } }
+@keyframes mo { to { opacity: 0; transform: translateX(-10px); } }
+
+/* nút lễ đè lên chân cảnh */
+.san-khau + .hanh-le { margin-top: -58px; position: relative; z-index: 2; padding-inline: 8px; }
+.san-khau + .hanh-le .le { padding: 7px 4px 6px; }
+.san-khau + .hanh-le .bieu { width: 28px; height: 28px; }
+.san-khau + .hanh-le .le-ten { font-size: 13px; }
+.san-khau + .hanh-le .le-phu { font-size: 11px; }
 .khung-canh {
   box-shadow: 0 18px 40px -12px #000c, 0 0 0 1px #b8873d55, inset 0 0 0 1px #0008;
 }

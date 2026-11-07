@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&text=%E7%93%8A%E5%BA%B5%E5%AF%BA%E5%8D%97%E7%84%A1%E9%98%BF%E5%BD%8C%E9%99%80%E4%BD%9B&display=swap">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -30,9 +30,19 @@
 <main>
   <!-- CHÁNH ĐIỆN -->
   <section class="trang" id="t-chanhdien" data-tab="chanhdien">
-    <div class="khung-canh">
-      <canvas id="canh" aria-label="Chánh điện: tượng Phật, lư hương và hai ngọn nến"></canvas>
-      <p class="dang-chay" id="dangChay">Lư hương đang chờ nén đầu tiên</p>
+    <div class="khung-canh san-khau">
+      <canvas id="canh" aria-label="Chánh điện: tượng Phật, đỉnh đồng, thảm đỏ và các bạn đạo ngồi hai bên"></canvas>
+      <div class="phu-tren">
+        <div class="chip-nhom">
+          <p class="chip"><span class="cham" aria-hidden="true"></span><span id="dangTrongChua">Chánh điện đang mở</span></p>
+          <p class="chip" id="dangChay">Đỉnh đồng chờ nén hương đầu tiên</p>
+        </div>
+        <aside class="bang-vang" aria-label="Tấm lòng thành hôm nay">
+          <p class="bang-vang-tieu">Tấm lòng thành</p>
+          <ol id="bangVang"></ol>
+        </aside>
+      </div>
+      <ol class="dong-tin" id="dongTin" aria-live="polite"></ol>
     </div>
     <div class="hanh-le">
       <button class="le" id="nutHuong">
@@ -179,11 +189,11 @@
   <form method="dialog"><button class="nut-chinh">Nam Mô A Di Đà Phật</button></form>
 </dialog>
 
-<script src="config.js?v=2"></script>
-<script src="data.js?v=2"></script>
-<script src="audio.js?v=2"></script>
-<script src="scene.js?v=2"></script>
-<script src="api.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="config.js?v=3"></script>
+<script src="data.js?v=3"></script>
+<script src="audio.js?v=3"></script>
+<script src="scene.js?v=3"></script>
+<script src="api.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>

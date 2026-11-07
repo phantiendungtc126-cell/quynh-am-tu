@@ -107,11 +107,8 @@
     const ai = new Set();
     ds.forEach(n => { ai.add(n.ten); for (let i = 0; i < n.so; i++) que.push({ tuoi: Math.min(1, (bay - n.t) / 1800000) }); });
     Canh.datNhang(que);
-    if (que.length) {
-      const ten3 = [...ai].map(n => n === ten ? 'bạn' : n);
-      const chuoiTen = ten3.length > 3 ? ten3.slice(0, 3).join(', ') + ' và ' + (ten3.length - 3) + ' người nữa' : ten3.join(', ').replace(/, ([^,]*)$/, ' và $1');
-      $('dangChay').textContent = 'Đang cháy ' + que.length + ' nén hương của ' + chuoiTen;
-    } else $('dangChay').textContent = 'Lư hương đang chờ nén đầu tiên';
+    $('dangChay').textContent = que.length ? 'Đang cháy ' + que.length + ' nén hương' : 'Đỉnh đồng chờ nén hương đầu tiên';
+    veSanKhau();
 
     // Niệm Phật
     $('soNiem').textContent = so(toi.niem);
@@ -123,6 +120,69 @@
 
     veCongDuc();
     veHoaDang();
+  }
+
+  // ---------- Sân khấu chánh điện: người ngồi, bảng vàng, thẻ tin ----------
+  const tat = n => { const p = n.trim().split(/\s+/); return ((p.length > 1 ? p[p.length - 2][0] : '') + p[p.length - 1][0]).toUpperCase(); };
+  const mauTen = n => { let h = 0; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 360; return `hsl(${h} 45% 34%)`; };
+  const diem = v => (v.huong || 0) * 3 + (v.mo || 0) + (v.chuong || 0) * 3 + (v.niem || 0) + (v.kinh || 0) * 50 + (v.hoadang || 0) * 10;
+  const daThay = new Set();
+  let lanDauTin = true;
+
+  function vongTen(n) {
+    const s = document.createElement('span'); s.className = 'vong-ten';
+    s.textContent = tat(n); s.style.background = mauTen(n);
+    return s;
+  }
+
+  function themTin(k) {
+    const ol = $('dongTin');
+    const li = document.createElement('li');
+    const d = document.createElement('div');
+    const b = document.createElement('b'); b.textContent = k.ten === ten ? k.ten + ' (bạn)' : k.ten;
+    const sm = document.createElement('small'); sm.textContent = 'đã ' + moTa(k);
+    d.append(b, sm); li.append(vongTen(k.ten), d);
+    ol.prepend(li);
+    while (ol.children.length > 3) ol.lastChild.remove();
+    setTimeout(() => li.remove(), 8200);
+  }
+
+  function veSanKhau() {
+    const tatCa = bangNguoi('tatca'), homNay = bangNguoi('homnay');
+    const bay = Date.now();
+    const gan = new Set(S.nhatKy.filter(k => bay - k.t < 15 * 60000).map(k => k.ten));
+    if (ten) gan.add(ten);
+    const ds = Object.keys(tatCa)
+      .sort((a, b) => (b === ten) - (a === ten) || (gan.has(b) - gan.has(a)) || diem(tatCa[b]) - diem(tatCa[a]))
+      .map(n => ({ ten: n, toi: n === ten, gan: gan.has(n) && n !== ten }));
+    Canh.datNguoi(ds);
+    const khac = [...gan].filter(n => n !== ten).length;
+    $('dangTrongChua').textContent = khac ? khac + ' bạn đạo vừa vào chùa' : 'Chánh điện đang mở';
+    // bảng vàng hôm nay
+    const top = Object.entries(homNay).map(([n, v]) => [n, diem(v)]).filter(r => r[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
+    const ol = $('bangVang'); ol.replaceChildren();
+    if (!top.length) { const li = document.createElement('li'); li.className = 'trong-bv'; li.textContent = 'Chưa ai dâng lễ hôm nay'; ol.append(li); }
+    top.forEach(([n, d], i) => {
+      const li = document.createElement('li');
+      const s = document.createElement('span'); s.className = 'hang-so'; s.textContent = i + 1;
+      const t = document.createElement('span'); t.className = 'ten-bv'; t.textContent = n;
+      const p = document.createElement('span'); p.className = 'diem'; p.textContent = so(d);
+      li.append(s, vongTen(n), t, p); ol.append(li);
+    });
+    // thẻ tin: việc mới của người khác từ lần tải trước
+    const moi = [];
+    S.nhatKy.forEach(k => {
+      const khoa = k.ten + '|' + k.loai + '|' + k.t;
+      if (daThay.has(khoa)) return;
+      daThay.add(khoa);
+      if (k.ten === ten && !lanDauTin) return;          // việc của mình đã hiện lúc bấm
+      if (bay - k.t < (lanDauTin ? 30 : 5) * 60000) moi.push(k);
+    });
+    moi.slice(0, lanDauTin ? 2 : 3).reverse().forEach((k, i) => setTimeout(() => {
+      themTin(k);
+      if (k.loai === 'huong') Canh.diDangHuong(k.ten); else Canh.lay(k.ten);
+    }, i * 900));
+    lanDauTin = false;
   }
 
   function veCongDuc() {
@@ -263,6 +323,7 @@
   function nghi(el, ms) { el.disabled = true; setTimeout(() => el.disabled = false, ms); }
   $('nutHuong').addEventListener('click', e => {
     themCho('huong', 3); Canh.huong(); nghi(e.currentTarget, 2500);
+    Canh.diDangHuong(ten); themTin({ ten, loai: 'huong', so: 3 });
     baoTin('Đã thắp 3 nén hương. Hương cháy trong 30 phút.');
   });
   nutNhanh($('nutMo'), () => { themCho('mo', 1); Am.mo(); Canh.mo(); });
