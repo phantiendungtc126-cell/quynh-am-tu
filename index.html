@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -90,12 +90,12 @@
   <section class="trang" id="t-kinh" data-tab="kinh" hidden>
     <div class="kinh-dau">
       <h2>Bài Hát Cầu Vồng</h2>
-      <p class="nhan">Bấm Hát, mỗi tiếng trống hát một chữ. Chạm vào chữ nào là hát từ chữ đó.</p>
+      <p class="nhan">Hát theo giai điệu "Ngôi sao nhỏ". Bấm Bắt đầu, chữ nào sáng lên thì bé hát chữ đó.</p>
     </div>
     <div class="dieu-khien">
-      <button class="nut-chinh" id="nutTung">Hát</button>
-      <label for="nhipMo" class="nhip">Nhịp <span id="nhipSo">104</span>/phút</label>
-      <input type="range" id="nhipMo" min="70" max="140" value="104">
+      <button class="nut-chinh" id="nutTung">Bắt đầu</button>
+      <label for="nhipMo" class="nhip">Nhịp <span id="nhipSo">100</span>/phút</label>
+      <input type="range" id="nhipMo" min="60" max="140" value="100">
     </div>
     <article class="kinh" id="kinh" lang="vi"></article>
   </section>
@@ -115,6 +115,55 @@
     <ol class="ds-hoadang" id="dsHoaDang"></ol>
   </section>
 
+  <!-- CỬA HÀNG: KEM, NƯỚC, GẮP THÚ -->
+  <section class="trang" id="t-cuahang" data-tab="cuahang" hidden>
+    <div class="the quay quay-kem">
+      <div class="quay-dau"><span class="quay-bieu" aria-hidden="true">🍦</span><div><h2>Quầy kem</h2><p class="nhan" id="demKem">Hôm nay cả nhóm ăn 0 que</p></div></div>
+      <div class="chon-mon" role="radiogroup" aria-label="Chọn vị kem" id="chonKem">
+        <button role="radio" aria-checked="true" data-mon="kem dâu" style="--m:#ff8fb1"><b>🍓</b>Dâu</button>
+        <button role="radio" aria-checked="false" data-mon="kem sô-cô-la" style="--m:#a0694a"><b>🍫</b>Sô-cô-la</button>
+        <button role="radio" aria-checked="false" data-mon="kem vani" style="--m:#f5d98b"><b>🍨</b>Vani</button>
+        <button role="radio" aria-checked="false" data-mon="kem trà xanh" style="--m:#8fd17a"><b>🍵</b>Trà xanh</button>
+        <button role="radio" aria-checked="false" data-mon="kem cầu vồng" style="--m:#b18cff"><b>🌈</b>Cầu vồng</button>
+      </div>
+      <div class="hang-mua">
+        <label for="choAiKem">Cho ai?</label>
+        <select id="choAiKem" class="cho-ai"></select>
+        <button class="nut-chinh nut-hong" id="nutKem">Lấy kem</button>
+      </div>
+    </div>
+
+    <div class="the quay quay-nuoc">
+      <div class="quay-dau"><span class="quay-bieu" aria-hidden="true">🧃</span><div><h2>Quầy nước</h2><p class="nhan" id="demNuoc">Hôm nay cả nhóm uống 0 ly</p></div></div>
+      <div class="chon-mon" role="radiogroup" aria-label="Chọn nước" id="chonNuoc">
+        <button role="radio" aria-checked="true" data-mon="nước cam" style="--m:#ffad3d"><b>🍊</b>Nước cam</button>
+        <button role="radio" aria-checked="false" data-mon="sữa dâu" style="--m:#ff9fc6"><b>🥛</b>Sữa dâu</button>
+        <button role="radio" aria-checked="false" data-mon="nước dừa" style="--m:#9bd77a"><b>🥥</b>Nước dừa</button>
+        <button role="radio" aria-checked="false" data-mon="nước dưa hấu" style="--m:#ff6b6b"><b>🍉</b>Dưa hấu</button>
+        <button role="radio" aria-checked="false" data-mon="chanh dây" style="--m:#ffd23f"><b>🍋</b>Chanh dây</button>
+      </div>
+      <div class="hang-mua">
+        <label for="choAiNuoc">Cho ai?</label>
+        <select id="choAiNuoc" class="cho-ai"></select>
+        <button class="nut-chinh nut-xanh" id="nutNuoc">Lấy nước</button>
+      </div>
+    </div>
+
+    <div class="the quay quay-gap">
+      <div class="quay-dau"><span class="quay-bieu" aria-hidden="true">🕹️</span><div><h2>Máy gắp thú</h2><p class="nhan" id="demGap">Hôm nay cả nhóm gắp được 0 con</p></div></div>
+      <div class="may-gap" id="mayGap">
+        <canvas id="cvGap" aria-label="Máy gắp thú: càng gắp chạy qua lại phía trên đống thú bông"></canvas>
+      </div>
+      <div class="hang-mua">
+        <p class="goi-y gap-goi-y" id="gapGoiY">Càng chạy qua lại. Bấm đúng lúc càng ở trên con thú bé thích!</p>
+        <button class="nut-chinh nut-tim" id="nutGap">Thả càng</button>
+      </div>
+    </div>
+
+    <h2 class="tieu">Quầy vừa bán</h2>
+    <ol class="nhat-ky" id="nhatKyQuay"></ol>
+  </section>
+
   <!-- BẢNG NGÔI SAO -->
   <section class="trang" id="t-congduc" data-tab="congduc" hidden>
     <div class="chuyen" role="tablist">
@@ -124,7 +173,7 @@
     <div class="tong-nhom" id="tongNhom"></div>
     <div class="bang-cuon">
       <table class="bang" id="bangCongDuc">
-        <thead><tr><th>Bạn nhỏ</th><th>Bóng bay</th><th>Nhún</th><th>Pháo giấy</th><th>Bắn</th><th>Bài hát</th><th>Điều ước</th></tr></thead>
+        <thead><tr><th>Bạn nhỏ</th><th>Bóng bay</th><th>Nhún</th><th>Pháo giấy</th><th>Bắn</th><th>Bài hát</th><th>Điều ước</th><th>Kem</th><th>Nước</th><th>Gắp thú</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -142,12 +191,13 @@
   </button>
   <div class="may-chu">
     <select id="chonBai" aria-label="Chọn nhạc">
-      <option value="thoikinh">Cả buổi chơi: hát, đếm số, nhạc vui</option>
-      <option value="kinh">Bài Hát Cầu Vồng</option>
-      <option value="niem">Nhạc vui không lời</option>
+      <option value="thoikinh">Nhạc thiếu nhi phát liên tục</option>
+      <option value="kinh">Hát cùng bé: Bài Hát Cầu Vồng</option>
+      <option value="niem">Nhạc ru êm dịu</option>
     </select>
     <span class="may-dong" id="mayDong">Chạm màn hình để nghe nhạc</span>
   </div>
+  <button class="nut-tiep" id="nutTiep" aria-label="Bài tiếp theo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14l9-7zM15 5h3v14h-3z"/></svg></button>
   <label class="am-luong" for="amLuong" aria-label="Âm lượng nhạc">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9q2 3 0 6M18.5 7q4 5 0 10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
     <input type="range" id="amLuong" min="0" max="1" step="0.05" value="0.55">
@@ -158,6 +208,7 @@
   <button data-di="chanhdien" aria-current="page"><b class="ic" aria-hidden="true">🎡</b>Công viên</button>
   <button data-di="niem"><b class="ic" aria-hidden="true">🫧</b>Bong bóng</button>
   <button data-di="kinh"><b class="ic" aria-hidden="true">🎵</b>Hát</button>
+  <button data-di="cuahang"><b class="ic" aria-hidden="true">🍦</b>Cửa hàng</button>
   <button data-di="hoadang"><b class="ic" aria-hidden="true">🎈</b>Điều ước</button>
   <button data-di="congduc"><b class="ic" aria-hidden="true">⭐</b>Ngôi sao</button>
 </nav>
@@ -188,11 +239,11 @@
   <form method="dialog"><button class="nut-chinh">Cảm ơn nha!</button></form>
 </dialog>
 
-<script src="config.js?v=4"></script>
-<script src="data.js?v=4"></script>
-<script src="audio.js?v=4"></script>
-<script src="scene.js?v=4"></script>
-<script src="api.js?v=4"></script>
-<script src="app.js?v=4"></script>
+<script src="config.js?v=5"></script>
+<script src="data.js?v=5"></script>
+<script src="audio.js?v=5"></script>
+<script src="scene.js?v=5"></script>
+<script src="api.js?v=5"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>

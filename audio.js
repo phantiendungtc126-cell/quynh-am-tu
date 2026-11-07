@@ -1,5 +1,5 @@
 // Âm thanh Công Viên Cầu Vồng: nhún "boing", pháo giấy "tèn ten", bong bóng "póc", hộp quà lắc lắc,
-// và bộ phát nhạc nền: bài hát đọc từng chữ theo nhịp trống + nốt đàn xylophone, nhạc vui không lời.
+// và bộ phát nhạc thiếu nhi (giai điệu phạm vi công cộng) chơi bằng tiếng hộp nhạc.
 window.Am = (() => {
   let ctx = null, tong = null, vang = null, bat = true;
   try { bat = localStorage.getItem('qat.am') !== 'tat'; } catch (e) {}
@@ -75,107 +75,105 @@ window.Am = (() => {
     dao(NOT.G5, t + 0.32, 0.9, 0.12 * to, 'triangle', 0, ra, 0.3);
   }
 
-  // ---------------- Bộ phát nhạc nền ----------------
+  // ---------------- Bộ phát nhạc thiếu nhi ----------------
+  // Giai điệu phạm vi công cộng trong data.js (BAI_NHAC), chơi bằng tiếng hộp nhạc + bass + hợp âm đệm.
   const Tung = (() => {
-    let mau = null, chuMap = null, dangTai = null, bus = null;
-    let chay = false, hen = null, tiep = 0, buoc = 0, ds = [], nhipSo = 0;
-    let amLuong = 0.55, nhip = 104, bai = 'thoikinh', ghiCong = false;
+    let bus = null, chay = false, hen = null, tiep = 0, buoc = 0, ds = [], thuTu = 0;
+    let amLuong = 0.55, nhip = 100, bai = 'thoikinh', ghiCong = false;
     const nghe = new Set();
     try {
       amLuong = +(localStorage.getItem('qat.amluong') || 0.55);
       bai = localStorage.getItem('qat.bai') || 'thoikinh';
-      nhip = +(localStorage.getItem('qat.nhip2') || 104);
+      nhip = +(localStorage.getItem('qat.nhip3') || 100);
+      thuTu = +(localStorage.getItem('qat.thutu') || 0);
     } catch (e) {}
 
-    const khoa = tu => tu.toLowerCase().replace(/[^\p{L}]/gu, '');
-    // giai điệu ngũ cung vui tai, lặp theo vị trí chữ trong câu
-    const GIAI = ['E5', 'E5', 'G5', 'A5', 'G5', 'E5', 'D5', 'C5', 'D5', 'E5', 'G5', 'E5'];
-    const GIAI2 = ['C5', 'D5', 'E5', 'C5', 'E5', 'G5', 'A5', 'G5', 'E5', 'D5', 'C5', 'D5'];
-    const HOP_AM = ['C4', 'A4', 'F4', 'G4'];
-    // nhạc vui không lời: 16 nốt lặp, - là nghỉ
-    const KHONG_LOI = ['C5', 'E5', 'G5', 'E5', 'A5', 'G5', 'E5', '-', 'F5', 'A5', 'G5', 'E5', 'D5', 'E5', 'C5', '-',
-      'E5', 'G5', 'A5', 'C6', 'A5', 'G5', 'E5', '-', 'D5', 'F5', 'E5', 'D5', 'C5', 'D5', 'C5', '-'];
+    const TAN = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+    const tanSo = n => { const m = /^([A-G])(#?)(\d)$/.exec(n); if (!m) return 0; const so = TAN[m[1]] + (m[2] ? 1 : 0) + (+m[3] + 1) * 12; return 440 * Math.pow(2, (so - 69) / 12); };
+    const HOP = { C: ['C3', 'E4', 'G4'], F: ['F3', 'A4', 'C5'], G: ['G3', 'B4', 'D5'], A: ['A3', 'C5', 'E5'], D: ['D3', 'F4', 'A4'], E: ['E3', 'G4', 'B4'] };
 
-    async function tai() {
-      if (mau) return true;
-      if (!dangTai) dangTai = (async () => {
-        const [j, b] = await Promise.all([
-          fetch('am/kinh.json?v=4').then(r => r.json()),
-          fetch('am/kinh.mp3?v=4').then(r => r.arrayBuffer()),
-        ]);
-        chuMap = j.chu;
-        mau = await new Promise((ok, loi) => ctx.decodeAudioData(b, ok, loi));
-        return true;
-      })().catch(e => { dangTai = null; throw e; });
-      return dangTai;
+    // hộp nhạc: âm cơ bản + bội âm sáng, tắt dần mềm
+    function hopNhac(f, t, dai, to) {
+      const d = Math.max(0.6, dai * 1.4);
+      dao(f, t, d, 0.26 * to, 'sine', 0, bus, 0.35);
+      dao(f * 2, t, d * 0.5, 0.07 * to, 'sine', 0, bus, 0.25);
+      dao(f * 3.01, t, 0.25, 0.035 * to, 'sine', 0, bus);
+    }
+    function demHop(ten, t, dai, nhe) {
+      const h = HOP[ten]; if (!h) return;
+      dao(tanSo(h[0]), t, Math.min(1.2, dai * 0.9), (nhe ? 0.12 : 0.2), 'triangle', 0, bus);
+      h.slice(1).forEach((n, i) => dao(tanSo(n), t + 0.02 + i * 0.03, Math.min(1.5, dai), nhe ? 0.025 : 0.04, 'triangle', 0, bus, 0.3));
     }
 
-    const tokens = s => s.split(/\s+/).filter(Boolean);
+    function phanTich(baiNhac) {
+      const not = baiNhac.not.trim().split(/\s+/).map(x => { const [n, p] = x.split(':'); return { n, p: p ? +p : 1 }; });
+      const hop = (baiNhac.hop || '').trim().split(/\s+/);
+      return { not, hop, hn: baiNhac.hopNhip || 2, ten: baiNhac.ten, nhip: baiNhac.nhip || 104 };
+    }
 
+    // Danh sách sự kiện: mỗi phần tử là một nốt (hoặc nghỉ) kèm hợp âm khi tới đầu nhóm phách
     function dungDs(loai, tuChu) {
       const out = [];
-      const baiHat = () => {
-        let i = 0;
-        const doan = [KINH.ten].concat(KINH.doan);
-        out.push({ tada: true, nghi: 2 });
-        doan.forEach((d, di) => {
-          const t = tokens(d);
-          t.forEach((tu, j) => {
-            if (i >= (tuChu || 0)) out.push({ chu: khoa(tu), kinhI: i, not: (di % 2 ? GIAI2 : GIAI)[j % 12], nghi: /[.!:]$/.test(tu) ? 1 : 0 });
-            i++;
-          });
-          if (i > (tuChu || 0)) out.push({ nghi: 1, not: '-' });
+      const them = (bn, opt = {}) => {
+        const b = phanTich(bn);
+        let phach = 0, hopI = 0, soDau = opt.kinhTu;
+        out.push({ tenBai: b.ten, nghi: 0 });
+        b.not.forEach((x, i) => {
+          const e = { n: x.n, p: x.p, nhip: opt.nhip || b.nhip, nhe: !!opt.nhe };
+          if (soDau !== undefined) e.kinhI = soDau + i;
+          // hợp âm nào rơi vào khoảng của nốt này
+          const ds2 = [];
+          while (hopI * b.hn < phach + x.p - 1e-6) { ds2.push({ ten: b.hop[hopI], lech: hopI * b.hn - phach }); hopI++; }
+          e.hop = ds2.filter(h => h.lech >= -1e-6); e.hn = b.hn;
+          if (opt.tuNot === undefined || i >= opt.tuNot) out.push(e);
+          phach += x.p;
         });
-        out.push({ tada: true, nghi: 3, xongKinh: true });
+        out.push({ nghi: 2, nhip: opt.nhip || b.nhip, xongKinh: !!opt.karaoke });
       };
-      const demSo = () => {
-        tokens(DEM_SO).forEach((tu, j) => out.push({ chu: khoa(tu), not: ['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B4', 'C5', 'D5', 'E5'][j] || 'C5', niem: true }));
-        out.push({ tada: true, nghi: 2 });
-      };
-      const khongLoi = (vong) => {
-        for (let v = 0; v < vong; v++) KHONG_LOI.forEach(n => out.push({ not: n, khongLoi: true }));
-      };
-      const tamBiet = () => {
-        tokens(TAM_BIET).forEach((tu, j) => out.push({ chu: khoa(tu), not: ['G5', 'E5', 'C5', 'E5', 'G5', 'A5', 'G5', 'E5'][j % 8], nghi: /[,!]$/.test(tu) ? 1 : 0 }));
-        out.push({ tada: true, nghi: 4 });
-      };
-      if (loai === 'kinh') baiHat();
-      else if (loai === 'niem') khongLoi(4);
-      else { baiHat(); demSo(); khongLoi(2); tamBiet(); }
+      if (loai === 'kinh') {
+        // karaoke: Twinkle, mỗi nốt một chữ; chỉ số chữ trong trang Hát bắt đầu sau các chữ của tên bài
+        const soChuTen = KINH.ten.split(/\s+/).length;
+        const tuNot = Math.max(0, (tuChu || 0) - soChuTen);
+        them(BAI_NHAC[0], { kinhTu: soChuTen, karaoke: true, nhip, tuNot });
+      } else if (loai === 'niem') {
+        // nhạc ru: chậm, nhẹ, không trống
+        [0, 2, 1].forEach(i => them(BAI_NHAC[i], { nhip: 72, nhe: true }));
+      } else {
+        for (let k = 0; k < BAI_NHAC.length; k++) them(BAI_NHAC[(thuTu + k) % BAI_NHAC.length]);
+      }
       return out;
-    }
-
-    function phatChu(k, t) {
-      const v = chuMap && chuMap[k];
-      if (!v) return;
-      const s = ctx.createBufferSource(); s.buffer = mau;
-      s.playbackRate.value = 1.04; // cao hơn chút cho vui tai
-      const g = ctx.createGain(); g.gain.value = 1.0;
-      s.connect(g); noi(g, bus, 0.25);
-      s.start(t, v[0], v[1] + 0.02);
     }
 
     function lich() {
       if (!chay) return;
       const truoc = document.hidden ? 2.5 : 0.35;
-      const chu = 60 / nhip;
       while (tiep < ctx.currentTime + truoc) {
         if (buoc >= ds.length) {
           if (bai === 'kinh' && ghiCong) { dung(); return; }
           ds = dungDs(bai, 0); buoc = 0;
         }
-        const b = ds[buoc++];
-        const t = tiep;
-        // trống: phách mạnh mỗi 4 nhịp, chập chả nhịp lẻ
-        if (nhipSo % 4 === 0) { trong(t, 0.7, bus); bass(NOT[HOP_AM[(nhipSo / 4 | 0) % 4]], t, 0.8, bus); }
-        else if (nhipSo % 2 === 0) chap(t, 0.8, bus);
-        if (b.tada) tadaAt(t, 0.5, bus);
-        if (b.not && b.not !== '-') xylo(NOT[b.not], t, b.chu ? 0.55 : 0.9, bus);
-        if (b.chu) phatChu(b.chu, t);
-        const tre = Math.max(0, (t - ctx.currentTime) * 1000);
-        if (b.kinhI !== undefined || b.xongKinh || b.niem || b.khongLoi) setTimeout(() => nghe.forEach(f => { try { f(b); } catch (e) {} }), tre);
-        const so = (b.chu || b.not ? 1 : 0) + (b.nghi || 0) + (!b.chu && !b.not && !b.nghi ? 1 : 0);
-        tiep += chu * so; nhipSo += so;
+        const e = ds[buoc++], t = tiep;
+        const giay = 60 / (e.nhip || 104);
+        if (e.tenBai) {
+          if (bai === 'thoikinh') { const i = BAI_NHAC.findIndex(b => b.ten === e.tenBai); thuTu = (i + 1) % BAI_NHAC.length; try { localStorage.setItem('qat.thutu', thuTu); } catch (er) {} }
+          setTimeout(() => nghe.forEach(f => { try { f({ tenBai: e.tenBai }); } catch (er) {} }), Math.max(0, (t - ctx.currentTime) * 1000));
+          continue;
+        }
+        if (e.n) {
+          if (e.n !== 'R') hopNhac(tanSo(e.n), t, e.p * giay, e.nhe ? 0.75 : 1);
+          (e.hop || []).forEach(h => {
+            demHop(h.ten, t + h.lech * giay, (e.hn || 2) * giay, e.nhe);
+            if (!e.nhe) {
+              // trống khẽ: phách đầu nhóm và chập chả giữa nhóm
+              dao(110, t + h.lech * giay, 0.14, 0.22, 'sine', 0.4, bus);
+              on(t + (h.lech + (e.hn || 2) / 2) * giay, 0.03, 8000, 1.2, 0.05, bus);
+            }
+          });
+        }
+        if (e.kinhI !== undefined || e.xongKinh) {
+          setTimeout(() => nghe.forEach(f => { try { f(e); } catch (er) {} }), Math.max(0, (t - ctx.currentTime) * 1000));
+        }
+        tiep += (e.n ? e.p : (e.nghi || 0)) * giay;
       }
     }
 
@@ -185,10 +183,9 @@ window.Am = (() => {
       ghiCong = !!opt.ghiCong;
       if (!bus) { bus = ctx.createGain(); bus.connect(tong); }
       bus.gain.setValueAtTime(amLuong, ctx.currentTime);
-      await tai();
       dung(true);
-      ds = dungDs(bai, opt.tuChu || 0); buoc = 0; nhipSo = 0;
-      tiep = ctx.currentTime + 0.3;
+      ds = dungDs(bai, opt.tuChu || 0); buoc = 0;
+      tiep = ctx.currentTime + 0.25;
       chay = true;
       hen = setInterval(lich, 60); lich();
       nghe.forEach(f => { try { f({ batDau: true }); } catch (e) {} });
@@ -204,16 +201,18 @@ window.Am = (() => {
       }
       if (!imLang) nghe.forEach(f => { try { f({ dung: true }); } catch (e) {} });
     }
+    // bài tiếp theo trong danh sách nhạc thiếu nhi
+    function baiTiep() { if (bai !== 'thoikinh') bai = 'thoikinh'; return batDau({ bai: 'thoikinh' }); }
 
     return {
       cauNiem: '',
-      batDau, dung,
+      batDau, dung, baiTiep,
       get chay() { return chay; },
       get bai() { return bai; },
       get amLuong() { return amLuong; },
       datAmLuong(v) { amLuong = v; try { localStorage.setItem('qat.amluong', v); } catch (e) {} if (bus && ctx) bus.gain.setTargetAtTime(v, ctx.currentTime, 0.05); },
       get nhip() { return nhip; },
-      datNhip(v) { nhip = v; try { localStorage.setItem('qat.nhip2', v); } catch (e) {} },
+      datNhip(v) { nhip = v; try { localStorage.setItem('qat.nhip3', v); } catch (e) {} },
       nghe(f) { nghe.add(f); return () => nghe.delete(f); },
     };
   })();

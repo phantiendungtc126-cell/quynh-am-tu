@@ -313,13 +313,13 @@ textarea {
 /* ---------- Thanh dưới ---------- */
 .duoi {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 4;
-  display: grid; grid-template-columns: repeat(5, 1fr);
+  display: grid; grid-template-columns: repeat(6, 1fr);
   background: #ffffff; border-top: 3px solid #d8eefc;
   padding: 3px max(8px, env(safe-area-inset-right, 0px)) calc(3px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
   box-shadow: 0 -6px 18px -10px #2b6fa855;
 }
 .duoi button {
-  background: none; border: 0; padding: 4px 2px 6px; font-size: 11.5px; font-weight: 800; color: var(--mo);
+  background: none; border: 0; padding: 4px 1px 6px; font-size: 11px; white-space: nowrap; font-weight: 800; color: var(--mo);
   display: grid; justify-items: center; gap: 0; min-width: 0; border-radius: 14px;
 }
 .duoi .ic { font-size: 22px; line-height: 1.2; font-weight: 400; transition: transform .2s; }
@@ -364,5 +364,41 @@ dialog label.tieng input { width: auto; }
 }
 @media (max-width: 380px) {
   .le-ten { font-size: 12.5px; }
-  .duoi button { font-size: 10.5px; }
+  .duoi button { font-size: 10px; }
+  .duoi .ic { font-size: 20px; }
 }
+
+/* ---------- Nút bài tiếp trên thanh nhạc ---------- */
+.nut-tiep { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--vien); background: #fff; display: grid; place-items: center; color: var(--tim); box-shadow: 0 2px 0 var(--vien); }
+.nut-tiep svg { width: 16px; height: 16px; fill: currentColor; }
+.nut-tiep:active { transform: translateY(2px); box-shadow: none; }
+@media (max-width: 380px) { .am-luong svg { display: none; } }
+
+/* ---------- Cửa hàng ---------- */
+.quay { display: grid; gap: 12px; position: relative; overflow: hidden; }
+.quay::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px; background: repeating-linear-gradient(90deg, var(--sk1) 0 22px, #fff 22px 44px); }
+.quay-kem { --sk1: #ff7eb0; }
+.quay-nuoc { --sk1: #3db7ff; }
+.quay-gap { --sk1: #7b6cff; }
+.quay-dau { display: flex; align-items: center; gap: 12px; padding-top: 6px; }
+.quay-dau h2 { font-size: 22px; }
+.quay-bieu { font-size: 40px; line-height: 1; filter: drop-shadow(0 3px 0 #0001); }
+.quay-bieu.nay { animation: nayMon .6s cubic-bezier(.3,1.8,.5,1); }
+@keyframes nayMon { 40% { transform: scale(1.35) rotate(-10deg); } }
+.chon-mon { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.chon-mon button {
+  display: grid; justify-items: center; gap: 0; padding: 6px 2px; min-width: 0;
+  border-radius: 16px; border: 2px solid var(--vien); background: #fff; font-size: 11.5px; font-weight: 800; color: var(--chu);
+  box-shadow: 0 3px 0 var(--vien); line-height: 1.2;
+}
+.chon-mon button b { font-size: 24px; font-weight: 400; line-height: 1.25; }
+.chon-mon button[aria-checked=true] { border-color: var(--m); background: color-mix(in srgb, var(--m) 22%, #fff); box-shadow: 0 3px 0 var(--m); transform: translateY(-2px); }
+.hang-mua { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hang-mua label { font-size: 13px; font-weight: 800; color: var(--mo); }
+.cho-ai { flex: 1; min-width: 120px; width: auto; padding: 8px 10px; }
+.nut-hong { background: linear-gradient(180deg, #ffa3cc, var(--hong)); box-shadow: 0 4px 0 #d04aa0, 0 8px 14px -6px #d04aa099, inset 0 2px 0 #ffffff60; }
+.nut-xanh { background: linear-gradient(180deg, #7fd0ff, var(--lam)); box-shadow: 0 4px 0 #1f8fd6, 0 8px 14px -6px #1f8fd699, inset 0 2px 0 #ffffff60; }
+.nut-tim { background: linear-gradient(180deg, #a296ff, var(--tim)); box-shadow: 0 4px 0 #5546d9, 0 8px 14px -6px #5546d999, inset 0 2px 0 #ffffff60; }
+.may-gap { border-radius: 18px; overflow: hidden; border: 4px solid #7b6cff; box-shadow: inset 0 0 0 3px #fff, 0 4px 0 #5546d9; }
+#cvGap { display: block; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; }
+.gap-goi-y { flex: 1; min-width: 160px; text-align: left; font-weight: 700; }

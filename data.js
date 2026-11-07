@@ -1,21 +1,42 @@
 // Bài hát và hộp quà của Công Viên Cầu Vồng. Lời bài hát viết riêng cho công viên.
 window.KINH = {
   ten: 'Bài Hát Cầu Vồng',
+  // Hát theo giai điệu "Twinkle Twinkle Little Star" (dân ca, phạm vi công cộng): 6 câu, mỗi câu 7 chữ ứng với 7 nốt.
   doan: [
-    'Cầu vồng bảy sắc, cong cong trên trời.',
-    'Đỏ cam vàng lục, lam chàm tím ơi.',
-    'Bé đi công viên, nắng vàng tươi vui.',
-    'Đu quay quay tròn, cầu trượt vèo vèo.',
-    'Bóng bay xanh đỏ, bay lên cao cao.',
-    'Bạn bè nắm tay, cùng nhau hát ca.',
-    'Chơi xong ngoan ngoãn, về nhà với mẹ.',
-    'Ngày mai mình lại, gặp nhau nhé ơi!',
+    'Cầu vồng bảy sắc trên trời xanh,',
+    'Đỏ cam vàng lục lam chàm tím.',
+    'Hôm nay bé đến công viên chơi,',
+    'Đu quay ngựa gỗ quay tròn tròn.',
+    'Bóng bay xanh đỏ bay lên cao,',
+    'Bạn bè nắm tay cùng hát ca!',
   ],
 };
 
-// Bài đếm số và lời chào, phát trong "Cả buổi chơi"
-window.DEM_SO = 'Một, hai, ba, bốn, năm, sáu, bảy, tám, chín, mười.';
-window.TAM_BIET = 'Tạm biệt các bạn, hẹn gặp lại nhé!';
+// Nhạc thiếu nhi: giai điệu dân gian và cổ điển đã thuộc phạm vi công cộng, trang tự chơi bằng tiếng hộp nhạc.
+// not: "nốt:số phách" (bỏ :số là 1 phách, R là nghỉ); hop: hợp âm theo từng nhóm hopNhip phách.
+window.BAI_NHAC = [
+  { ten: 'Ngôi sao nhỏ (Twinkle Twinkle Little Star)', nhip: 100, hopNhip: 2,
+    not: 'C5 C5 G5 G5 A5 A5 G5:2 F5 F5 E5 E5 D5 D5 C5:2 G5 G5 F5 F5 E5 E5 D5:2 G5 G5 F5 F5 E5 E5 D5:2 C5 C5 G5 G5 A5 A5 G5:2 F5 F5 E5 E5 D5 D5 C5:2',
+    hop: 'C C F C F C G C C G C G C G C G C C F C F C G C' },
+  { ten: 'Kìa con bướm vàng (Frère Jacques)', nhip: 112, hopNhip: 2,
+    not: 'C5 D5 E5 C5 C5 D5 E5 C5 E5 F5 G5:2 E5 F5 G5:2 G5:.5 A5:.5 G5:.5 F5:.5 E5 C5 G5:.5 A5:.5 G5:.5 F5:.5 E5 C5 C5 G4 C5:2 C5 G4 C5:2',
+    hop: 'C C C C C C C C C C C C G C G C' },
+  { ten: 'Chú cừu nhỏ (Mary Had a Little Lamb)', nhip: 112, hopNhip: 2,
+    not: 'E5 D5 C5 D5 E5 E5 E5:2 D5 D5 D5:2 E5 G5 G5:2 E5 D5 C5 D5 E5 E5 E5 E5 D5 D5 E5 D5 C5:4',
+    hop: 'C C C C G G C C C C C C G G C C' },
+  { ten: 'Cầu London (London Bridge)', nhip: 108, hopNhip: 2,
+    not: 'G5:1.5 A5:.5 G5 F5 E5 F5 G5:2 D5 E5 F5:2 E5 F5 G5:2 G5:1.5 A5:.5 G5 F5 E5 F5 G5:2 D5:2 G5:2 E5 C5:3',
+    hop: 'C C C C G G C C C C C C G G C C' },
+  { ten: 'Nông trại vui vẻ (Old MacDonald)', nhip: 116, hopNhip: 2,
+    not: 'C5 C5 C5 G4 A4 A4 G4:2 E5 E5 D5 D5 C5:3 G4 C5 C5 C5 G4 A4 A4 G4:2 E5 E5 D5 D5 C5:4',
+    hop: 'C C F C C G C C C C F C C G C C' },
+  { ten: 'Chèo thuyền (Row Row Row Your Boat)', nhip: 104, hopNhip: 1.5,
+    not: 'C5:1.5 C5:1.5 C5 D5:.5 E5:1.5 E5 D5:.5 E5 F5:.5 G5:3 C6:.5 C6:.5 C6:.5 G5:.5 G5:.5 G5:.5 E5:.5 E5:.5 E5:.5 C5:.5 C5:.5 C5:.5 G5 F5:.5 E5 D5:.5 C5:3',
+    hop: 'C C C C C C C C C C C C G G C C' },
+  { ten: 'Khúc ca vui (Ode to Joy)', nhip: 112, hopNhip: 2,
+    not: 'E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 E5:1.5 D5:.5 D5:2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5:1.5 C5:.5 C5:2 D5 D5 E5 C5 D5 E5:.5 F5:.5 E5 C5 D5 E5:.5 F5:.5 E5 D5 C5 D5 G4:2 E5 E5 F5 G5 G5 F5 E5 D5 C5 C5 D5 E5 D5:1.5 C5:.5 C5:2',
+    hop: 'C C C G C C G G C C C G C C G C G C G C G C C G C C C G C C G C' },
+];
 
 // 12 hộp quà bất ngờ: món quà, lời chúc và một việc nhỏ làm trong ngày.
 window.QUA = [
