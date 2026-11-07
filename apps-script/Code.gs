@@ -6,9 +6,9 @@
  */
 const MA_VAO_CONG = 'doi-chuoi-nay';
 const MUI_GIO = 'Asia/Ho_Chi_Minh';
-const LOAI = ['huong', 'mo', 'chuong', 'niem', 'kinh', 'hoadang', 'xam'];
+const LOAI = ['huong', 'mo', 'chuong', 'niem', 'kinh', 'hoadang', 'xam', 'kem', 'nuoc', 'gap'];
 const GOP = { mo: 1, niem: 1, chuong: 1 }; // gộp vào dòng nhật ký cũ nếu cùng người, trong 10 phút
-const TOI_DA = { huong: 30, mo: 2000, chuong: 30, niem: 5000, kinh: 5, hoadang: 3, xam: 5 };
+const TOI_DA = { huong: 30, mo: 2000, chuong: 30, niem: 5000, kinh: 5, hoadang: 3, xam: 5, kem: 10, nuoc: 10, gap: 10 };
 
 function doPost(e) {
   try {
