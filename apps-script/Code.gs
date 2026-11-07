@@ -1,10 +1,10 @@
 /**
- * Quỳnh Am Tự: nơi giữ sổ công đức chung của nhóm, nằm trong một Google Sheet của bạn.
+ * Công Viên Cầu Vồng: nơi giữ sổ ngôi sao chung của nhóm, nằm trong một Google Sheet của bạn.
  *
- * BẮT BUỘC: đổi MA_VAO_CHUA bên dưới thành một chuỗi riêng (ví dụ 'quynham-2026').
+ * BẮT BUỘC: đổi MA_VAO_CONG bên dưới thành một chuỗi riêng (ví dụ 'cauvong-2026').
  * Gửi chuỗi đó cho bạn bè trong nhóm Zalo. Ai không có mã thì không ghi, không đọc được.
  */
-const MA_VAO_CHUA = 'doi-chuoi-nay';
+const MA_VAO_CONG = 'doi-chuoi-nay';
 const MUI_GIO = 'Asia/Ho_Chi_Minh';
 const LOAI = ['huong', 'mo', 'chuong', 'niem', 'kinh', 'hoadang', 'xam'];
 const GOP = { mo: 1, niem: 1, chuong: 1 }; // gộp vào dòng nhật ký cũ nếu cùng người, trong 10 phút
@@ -13,11 +13,11 @@ const TOI_DA = { huong: 30, mo: 2000, chuong: 30, niem: 5000, kinh: 5, hoadang: 
 function doPost(e) {
   try {
     const d = JSON.parse(e.postData.contents);
-    if (MA_VAO_CHUA === 'doi-chuoi-nay') return tra({ ok: false, error: 'Chủ chùa chưa đổi MA_VAO_CHUA trong Apps Script' });
-    if (String(d.ma || '') !== MA_VAO_CHUA) return tra({ ok: false, error: 'Sai mã vào chùa' });
+    if (MA_VAO_CONG === 'doi-chuoi-nay') return tra({ ok: false, error: 'Người lập công viên chưa đổi MA_VAO_CONG trong Apps Script' });
+    if (String(d.ma || '') !== MA_VAO_CONG) return tra({ ok: false, error: 'Sai mã vào cổng' });
     if (d.action === 'ping') return tra({ ok: true });
     if (d.action === 'state') return tra(trangThai());
-    if (d.action === 'act') return tra(ghiCongDuc(d.ten, d.items));
+    if (d.action === 'act') return tra(ghiDiem(d.ten, d.items));
     return tra({ ok: false, error: 'Lệnh không hợp lệ' });
   } catch (err) {
     return tra({ ok: false, error: String(err && err.message || err) });
@@ -25,7 +25,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return tra({ ok: true, msg: 'Quỳnh Am Tự đang mở cửa. Trang chùa gửi dữ liệu bằng POST.' });
+  return tra({ ok: true, msg: 'Công Viên Cầu Vồng đang mở cửa. Trang công viên gửi dữ liệu bằng POST.' });
 }
 
 function tra(obj) {
@@ -48,7 +48,7 @@ function moSheet() {
   const p = PropertiesService.getScriptProperties();
   const id = p.getProperty('SHEET_ID');
   if (id) return SpreadsheetApp.openById(id);
-  const ss = SpreadsheetApp.create('Quỳnh Am Tự - Sổ công đức');
+  const ss = SpreadsheetApp.create('Công Viên Cầu Vồng - Sổ ngôi sao');
   p.setProperty('SHEET_ID', ss.getId());
   return ss;
 }
@@ -57,7 +57,7 @@ const NHAT_KY = () => bang('NhatKy', ['ThoiGian', 'Ten', 'Loai', 'So', 'NoiDung'
 const TONG_HOP = () => bang('TongHop', ['Ngay', 'Ten'].concat(LOAI));
 const HOA_DANG = () => bang('HoaDang', ['ThoiGian', 'Ten', 'LoiNguyen', 'AnTen']);
 
-function ghiCongDuc(tenNguoi, items) {
+function ghiDiem(tenNguoi, items) {
   const ten = String(tenNguoi || '').trim().replace(/\s+/g, ' ').slice(0, 30);
   if (!ten) throw new Error('Thiếu tên người ghi');
   if (!Array.isArray(items) || !items.length) return trangThai();
@@ -150,5 +150,5 @@ function trangThai() {
 function capQuyen() {
   NHAT_KY(); TONG_HOP(); HOA_DANG();
   const ss = SpreadsheetApp.getActiveSpreadsheet() || moSheet();
-  Logger.log('Đã sẵn sàng. Sổ công đức: ' + ss.getUrl());
+  Logger.log('Đã sẵn sàng. Sổ ngôi sao: ' + ss.getUrl());
 }
