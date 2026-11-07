@@ -1,7 +1,7 @@
-"""Tạo tiếng tụng kinh cho Quỳnh Am Tự bằng ZeroTTS (chạy trên máy, không cần mạng sau khi tải mô hình).
+"""Tạo tiếng hát cho Công Viên Cầu Vồng bằng ZeroTTS (chạy trên máy, không cần mạng sau khi tải mô hình).
 
 Mỗi chữ (âm tiết) được đọc riêng, cắt khoảng lặng, cân âm lượng, rồi ghép vào một file am/kinh.mp3.
-am/kinh.json ghi vị trí từng chữ trong file. Trang chùa phát từng chữ theo nhịp mõ, giống thầy tụng.
+am/kinh.json ghi vị trí từng chữ trong file. Trang phát từng chữ một theo nhịp trống, kèm nốt nhạc.
 
 Chạy:  PYTHONUTF8=1 <python có zerotts> cong-cu/tao_am.py [giọng]
 """
@@ -13,18 +13,14 @@ from scipy.signal import resample_poly
 from zerotts import ZeroTTS
 
 GOC = Path(__file__).resolve().parent.parent
-GIONG = sys.argv[1] if len(sys.argv) > 1 else 'huuduc'
+GIONG = sys.argv[1] if len(sys.argv) > 1 else 'hamy'
 SR_RA = 24000
 KHOANG = 0.12  # giây lặng giữa các chữ trong file ghép
 
 data = (GOC / 'data.js').read_text(encoding='utf-8')
-kinh = data.split('window.QUE_XAM')[0]
+kinh = data.split('window.QUA')[0]
 cau = re.findall(r"'([^']+)'", kinh)
-cau += [
-    'Nam Mô A Di Đà Phật', 'Nam Mô Quán Thế Âm Bồ Tát',
-    'Nam Mô Bổn Sư Thích Ca Mâu Ni Phật', 'Nam Mô Dược Sư Lưu Ly Quang Vương Phật',
-    'Nguyện đem công đức này, hướng về khắp tất cả, đệ tử và chúng sanh, đều trọn thành Phật đạo.',
-]
+cau += []  # bài hát, đếm số, tạm biệt đều nằm trong data.js
 
 
 def khoa(tu):
