@@ -122,7 +122,7 @@
     veHoaDang();
   }
 
-  // ---------- Sân khấu chánh điện: người ngồi, bảng vàng, thẻ tin ----------
+  // ---------- Sân chơi: các bạn chibi, bảng Bé chăm chơi, thẻ tin ----------
   const tat = n => { const p = n.trim().split(/\s+/); return ((p.length > 1 ? p[p.length - 2][0] : '') + p[p.length - 1][0]).toUpperCase(); };
   const mauTen = n => { let h = 0; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 360; return `hsl(${h} 45% 34%)`; };
   const diem = v => (v.huong || 0) * 3 + (v.mo || 0) + (v.chuong || 0) * 3 + (v.niem || 0) + (v.kinh || 0) * 50 + (v.hoadang || 0) * 10;
@@ -323,7 +323,7 @@
   });
   Am.Tung.cauNiem = $('cauNiem').value;
 
-  // ---------- Chánh điện ----------
+  // ---------- Công viên ----------
   function nghi(el, ms) { el.disabled = true; setTimeout(() => el.disabled = false, ms); }
   $('nutHuong').addEventListener('click', e => {
     themCho('huong', 3); Canh.huong(); nghi(e.currentTarget, 2500);
@@ -333,7 +333,7 @@
   nutNhanh($('nutMo'), () => { themCho('mo', 1); Am.mo(); Canh.mo(); });
   $('nutChuong').addEventListener('click', e => { themCho('chuong', 1); Am.chuong(); Canh.chuong(); nghi(e.currentTarget, 3000); });
   $('gioTuChung').textContent = (window.CHUA && CHUA.GIO_TU_CHUNG) || 'Nhóm chưa hẹn giờ';
-  // chạm thẳng vào chuông, mõ trong cảnh
+  // chạm thẳng vào mặt trời, ngựa gỗ trong cảnh
   Canh.onCham = vat => {
     if (vat === 'mo') { themCho('mo', 1); Am.mo(); Canh.mo(); }
     if (vat === 'chuong' && !$('nutChuong').disabled) { themCho('chuong', 1); Am.chuong(); Canh.chuong(); nghi($('nutChuong'), 3000); }
@@ -361,7 +361,7 @@
     }, 1250);
   });
 
-  // ---------- Tụng kinh ----------
+  // ---------- Hát cùng bé ----------
   const kinhEl = $('kinh');
   const chu = [];
   (function dungKinh() {
@@ -380,7 +380,7 @@
     ghi.textContent = 'Chạm vào một chữ để hát từ chữ đó.';
     kinhEl.append(ghi);
   })();
-  // Giọng tụng do Am.Tung phát; chữ đang đọc sáng lên theo từng tiếng mõ.
+  // Tiếng hát do Am.Tung phát; chữ đang hát sáng lên theo từng tiếng trống.
   const T = Am.Tung;
   let viTri = 0, dangChu = -1, tungGhi = false, khoaMan = null;
   const nhipEl = $('nhipMo');
@@ -431,7 +431,7 @@
     if (b.dung || b.batDau) capNhatMay();
   });
 
-  // ---------- Thanh phát kinh nhỏ ----------
+  // ---------- Thanh phát nhạc nhỏ ----------
   const chonBai = $('chonBai'), amLuongEl = $('amLuong');
   chonBai.value = T.bai === 'kinh' || T.bai === 'niem' ? T.bai : 'thoikinh';
   amLuongEl.value = T.amLuong;
@@ -465,7 +465,7 @@
     $('mayDong').textContent = 'Chạm màn hình để nghe nhạc';
   } else capNhatMay();
 
-  // ---------- Hoa đăng ----------
+  // ---------- Điều ước ----------
   const loi = $('loiNguyen');
   loi.addEventListener('input', () => { $('demChu').textContent = loi.value.length + '/200'; });
   $('formHoaDang').addEventListener('submit', e => {
@@ -500,7 +500,7 @@
     veCongDuc();
   }));
 
-  // ---------- Hộp vào chùa ----------
+  // ---------- Hộp vào công viên ----------
   function moHopVao() {
     const hop = $('hopVao');
     $('tenBan').value = ten;
